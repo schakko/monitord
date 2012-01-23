@@ -11,3 +11,5 @@ libtool
 stamp-h1
 *.nsi
 monitord/monitord
+*.in
+configure
