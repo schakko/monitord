@@ -56,7 +56,7 @@ typedef struct
 typedef std::map<std::string,TopicInfo*> Topics;
 typedef std::pair<std::string,TopicInfo*> PairMapping;
 
-class MonitorPlugInActiveMQ : public MonitorPlugIn
+class MonitorPlugInActiveMQ : public MonitorPlugIn, public cms::ExceptionListener
 {
 public:
 	MonitorPlugInActiveMQ();
@@ -75,6 +75,7 @@ public:
  	bool m_bConnected;
 	bool m_bTopicsInitialized;
 
+	std::auto_ptr<activemq::core::ActiveMQConnectionFactory> m_connectionFactory;
 	cms::Connection* m_connection;
 	cms::Session* m_session;
 
@@ -86,17 +87,24 @@ public:
 	bool quitProcessing();
 	void Show();
 
-	Topics getTopics();
-	void setTopics(Topics &topics);
 	void shutdownActiveMQCPPLibrary();
 	void initializeActiveMQCPPLibrary();
 	void initializeConfiguration(XMLNode config);
-	void initializeConnectionFactory(activemq::core::ActiveMQConnectionFactory *connectionFactory);
-	bool initializeActiveMqConnection();
+	void initializeConnectionFactory();
+
+	bool establishConnection();
+	bool initializeConnection();
+	void freeConnection();
+
 	void initializeTopics(Topics &topics);
+	void freeTopics();
+
 	void parseTopics(XMLNode config, Topics &topics, TopicInfo &referenceTopic);
 	void parseTopic(XMLNode config, TopicInfo &topicInfo, TopicInfo &referenceTopic);
 	void initializeTopic(TopicInfo &topicInfo, TopicInfo &referenceTopic);
+
+	/** Exception-Listener */
+	virtual void onException(const cms::CMSException& ex AMQCPP_UNUSED);
 };
 
 class MonitorPlugInActiveMQFactory : public MonitorPlugInFactory
