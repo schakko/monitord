@@ -40,11 +40,10 @@ public:
 	std::string& operator[](const char key[]) { return operator[](std::string(key));}  ;
 	std::string& operator[](char key[]) { return operator[](std::string(key));}  ;
 
-	friend std::ostream & operator<<(std::ostream & os, ModuleResultBase &m) ;
-
 	ModuleResultBase();
 	virtual ~ModuleResultBase();
 	void copyTo(ModuleResultBase & target) ;
+	void Dump();
 
 	std::string& get(std::string key) { return m_Items[key];} ;
 	bool add(std::string key,std::string item) { m_Items[key]=item; return true;} ;
@@ -54,8 +53,6 @@ public:
 protected:
 	//time_t m_tTime ;
 } ;
-
-std::ostream & operator<<(std::ostream & os, ModuleResultBase & m) ;
 
 typedef ModuleResultBase* ModuleResultBasePtr ;
 typedef std::vector<ModuleResultBase*> MODULERESULTSET ;

@@ -19,7 +19,7 @@ MonitorBlockingSignal::MonitorBlockingSignal()
 		ThrowMonitorException("error initialising pthreads Condition/Mutex") ;
 	}
 #endif
-	FILE_LOG(logDEBUG1) << "Signal erstellt..."  ;
+	LOG_DEBUG("Signal erstellt...") 
 }
 
 MonitorBlockingSignal::~MonitorBlockingSignal()
@@ -45,7 +45,7 @@ void MonitorBlockingSignal::ResetSignal()
 
 void MonitorBlockingSignal::SetSignal()
 {
-	FILE_LOG(logDEBUG1) << "Signal wird gesetzt"  ;
+	LOG_DEBUG("Signal wird gesetzt")  
 #ifdef WIN32
 	if (m_Handle)
 		SetEvent(m_Handle);
@@ -58,7 +58,7 @@ void MonitorBlockingSignal::SetSignal()
 
 void MonitorBlockingSignal::WaitForSignal()
 {
-	FILE_LOG(logDEBUG1) << "Waiting for signal"  ;
+	 LOG_DEBUG("Waiting for signal")
 #ifdef WIN32
 	if (m_Handle)
 		WaitForSingleObject(m_Handle,INFINITE) ;
@@ -67,5 +67,5 @@ void MonitorBlockingSignal::WaitForSignal()
 #else
 	pthread_cond_wait(&m_ptCondition,&m_ptLock) ;
 #endif
-	FILE_LOG(logDEBUG1) << "Waiting for signal beendet"  ;
+	LOG_DEBUG("Waiting for signal beendet")  
 }

@@ -23,15 +23,15 @@ void SocketThreadFMS32::processInput()
 	std::string Kommando=m_CommandBuffer;
 
 	if (Kommando == "AllFMS") {
-		FILE_LOG (logDEBUG) << "FMS32 Kommando nicht implementiert (Übertragung aktueller Fahrzeugstatus aller Fahrzeuge).";
+		LOG_DEBUG("FMS32 Kommando nicht implementiert (Übertragung aktueller Fahrzeugstatus aller Fahrzeuge).")
 	} else if (Kommando == "GetAlarmListe") {
-		FILE_LOG (logDEBUG) << "FMS32 Kommando nicht implementiert (GetAlarmListe).";
+		LOG_DEBUG("FMS32 Kommando nicht implementiert (GetAlarmListe).")
 	} else if (Kommando.substr(0, 12) == "GetFMSListe\t") {
-		FILE_LOG (logDEBUG) << "FMS32 Kommando nicht implementiert (Übertragung Statuswechsel der letzten n Stunden).";
+		LOG_DEBUG("FMS32 Kommando nicht implementiert (Übertragung Statuswechsel der letzten n Stunden).")
 	} else if (Kommando.substr(0, 12) == "GetPOCListe\t") {
-		FILE_LOG (logDEBUG) << "FMS32 Kommando nicht implementiert (Übertragung POCSAG Rufe der letzten n Stunden).";
+		LOG_DEBUG( "FMS32 Kommando nicht implementiert (Übertragung POCSAG Rufe der letzten n Stunden).")
 	} else {
-		FILE_LOG (logDEBUG) << "received from FMS32: " <<  m_CommandBuffer;
+		LOG_DEBUG("received from FMS32: " <<  m_CommandBuffer)
 	}
 
 	return;
@@ -114,7 +114,7 @@ std::string SocketThreadFMS32::createPOCSAGOutputString(ModuleResultBase Result)
 	catch (BadConversion)
 	{
 		sub=0 ;
-		FILE_LOG (logERROR) << "Error converting subaddress : " <<  Result["sub"] ;
+		LOG_ERROR("Error converting subaddress : " <<  Result["sub"])
 	}
 
 	subString=convertIntToString(sub) ;

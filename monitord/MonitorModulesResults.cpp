@@ -33,14 +33,11 @@ void ModuleResultBase::copyTo(ModuleResultBase & target)
 	target.m_Items = m_Items ;
 }
 
-
-ostream& operator<<(ostream & os, ModuleResultBase & m)
-{
- for (ResultItemsMap::iterator iter=m.m_Items.begin(); iter!=m.m_Items.end(); ++iter)
-	 {
-        os << iter->first << " = \"" << iter->second << "\"" << endl ;
-	 }
-	 return os ;
+void ModuleResultBase::Dump() {
+	for (ResultItemsMap::iterator iter=m_Items.begin(); iter!=m_Items.end(); ++iter)
+	{
+		LOG_DEBUG(iter->first << " = \"" << iter->second << "\"");
+	}
 }
 
 //----------------------------------------------------------------
@@ -48,7 +45,7 @@ ostream& operator<<(ostream & os, ModuleResultBase & m)
 //
 MonitorResultsDispatcher::MonitorResultsDispatcher()
 {
-	FILE_LOG(logDEBUG) << "Dispatcher startet"  ;
+	LOG_DEBUG("Dispatcher startet") 
 
 	if ( memLockCreate( 12346, & m_MemLock) < 0) {
    		ThrowMonitorException("Dispatcher: memLockCreate failed") ;
@@ -91,9 +88,9 @@ void* MonitorResultsDispatcher::Thread()
 
 	do
 	{
-		FILE_LOG(logDEBUG1) << "Dispatcher waiting" ;
+		LOG_DEBUG("Dispatcher waiting") 
 		m_Signal.WaitForSignal() ; // Auf neue Daten warten ...
-		FILE_LOG(logDEBUG1) << "Dispatcher running" ;
+		LOG_DEBUG("Dispatcher running")
 
 		while (m_Results.size()>0)
 		{
@@ -101,7 +98,7 @@ void* MonitorResultsDispatcher::Thread()
 			memLock(m_MemLock) ;
 			for (MODULERESULTSET::iterator i=m_Results.begin(); i<m_Results.end();i++)
 			{
-				FILE_LOG(logDEBUG1) << "bearbeite ResultSet aus GlobalDispatcher Queue" ;
+				LOG_DEBUG("bearbeite ResultSet aus GlobalDispatcher Queue")
 				// Daten holen, verteilen, aus Queue loeschen
 				pRes=*i ;
 
@@ -115,11 +112,11 @@ void* MonitorResultsDispatcher::Thread()
 					#endif
 				}
 				// Eintrag aus der Warteschlange loeschen
-				FILE_LOG(logDEBUG4) << "loesche ResultSet aus GlobalDispatcher Queue" ;
+				LOG_DEBUG("loesche ResultSet aus GlobalDispatcher Queue") 
 				m_Results.erase(i) ;
-				FILE_LOG(logDEBUG4) << "delete pRes" ;
+				LOG_DEBUG("delete pRes") 
 				delete pRes ;
-				FILE_LOG(logDEBUG4) << "delete pRes:done" ;
+				LOG_DEBUG("delete pRes:done") 
 			}
 			memUnlock(m_MemLock) ;
 		}

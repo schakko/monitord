@@ -97,16 +97,16 @@ void MonitorModuleFMS::initialize(int sampleRate, int vorlaufbits, bool crccheck
 {
 	float f;
 	int i;
-	FILE_LOG(logDEBUG) << "FMS Parameter" ;
-	FILE_LOG(logDEBUG) << "sample : " << sampleRate  ;
-	FILE_LOG(logDEBUG) << "syncbits: " << vorlaufbits  ;
-	FILE_LOG(logDEBUG) << "crc    : " << crccheck  ;
-	FILE_LOG(logDEBUG) << "level  : " << signallevel  ;
-	FILE_LOG(logDEBUG) << "Algo   : " << algorithm  ;
-	FILE_LOG(logDEBUG) << "ignW   : " << ignore_Wiederholung ;
-	FILE_LOG(logDEBUG) << "ignQ   : " << ignore_Quittung ;
-	FILE_LOG(logDEBUG) << "ErrC   : " << error_correction ;
-	FILE_LOG(logDEBUG) << "force   : " << force_preambel  ;
+	LOG_DEBUG( "FMS Parameter")
+	LOG_DEBUG( "sample : " << sampleRate)
+	LOG_DEBUG( "syncbits: " << vorlaufbits)
+	LOG_DEBUG( "crc    : " << crccheck)
+	LOG_DEBUG( "level  : " << signallevel)
+	LOG_DEBUG( "Algo   : " << algorithm)
+	LOG_DEBUG( "ignW   : " << ignore_Wiederholung)
+	LOG_DEBUG( "ignQ   : " << ignore_Quittung)
+	LOG_DEBUG( "ErrC   : " << error_correction)
+	LOG_DEBUG( "force   : " << force_preambel)
 
 	m_bErrorCorrection=error_correction ;
 	m_iAlgorithmus=algorithm ;
@@ -774,7 +774,7 @@ void MonitorModuleFMS::DisplayResult(std::string input)
 		pRes->set("kfz",kfzString) ;
 		pRes->set("textuebertragung",input) ;
 
-		FILE_LOG(logDEBUG) << (*pRes) << "-----" ;
+		pRes->Dump(); 
 		GlobalDispatcher->addResult(pRes) ;
 	} ;
 }

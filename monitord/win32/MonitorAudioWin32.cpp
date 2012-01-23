@@ -36,8 +36,7 @@ void MonitorAudioWin32::Stop() {
 
 int MonitorAudioWin32::InitDevice() {
 	if ((pcm_name.length() == 0) || (pcm_rate == 0)) {
-		FILE_LOG(logERROR) << "[WINMM] InitDevice Argument Error: pcm_name="
-			<< pcm_name << ", pcm_rate=" << pcm_rate ;
+		LOG_ERROR("[WINMM] InitDevice Argument Error: pcm_name=" << pcm_name << ", pcm_rate=" << pcm_rate)
 		return -1;
 	}
 
@@ -62,7 +61,7 @@ int MonitorAudioWin32::InitDevice() {
 	if (deviceName.substr(0,devString.size())==devString)
 	{
 		nDevId=convertToInt(deviceName.substr(devString.size()));
-		FILE_LOG(logINFO) << "using windows device #" << nDevId  ;
+		LOG_INFO("using windows device #" << nDevId  )
 	}
 	if ((nDevId<0))
 	{
@@ -73,7 +72,7 @@ int MonitorAudioWin32::InitDevice() {
 	rc = waveInGetDevCaps(nDevId, &wic, sizeof(wic));
 
 	if (rc == MMSYSERR_NOERROR) {
-		FILE_LOG(logINFO) << "starting wavein for sounddevice: \"" << wic.szPname << "\"" ;
+		LOG_INFO("starting wavein for sounddevice: \"" << wic.szPname << "\"" )
 		wfx.nChannels      = 2;      // stereo
 		wfx.nSamplesPerSec = 22050;  // 22.05 kHz (22.05 * 1000)
 		wfx.wFormatTag      = WAVE_FORMAT_PCM;
@@ -119,7 +118,7 @@ int MonitorAudioWin32::InitDevice() {
 }
 
 int MonitorAudioWin32::CloseDevice() {
-	FILE_LOG(logINFO) << "Closing sound device..."  ;
+	LOG_INFO("Closing sound device..."  )
 	int i=0 ;
 	// waveInReset Stops the device and sets all the pending buffers to zero.
 	if (hwi != NULL) {
@@ -151,7 +150,7 @@ int MonitorAudioWin32::CloseDevice() {
 			}
 		}
 	}
-	FILE_LOG(logINFO) << "sound device closed"  ;
+	LOG_INFO("sound device closed"  )
 	return 0;
 }
 
@@ -209,7 +208,7 @@ void* MonitorAudioWin32::Thread() {
 
 	rc=InitDevice() ;
 	if ( rc < 0) {
-		FILE_LOG(logERROR) << "[WINMM] Error initializing PCM device " << pcm_name;
+		LOG_ERROR("[WINMM] Error initializing PCM device " << pcm_name)
 
 		return NULL ;
 	}
@@ -253,11 +252,11 @@ void* MonitorAudioWin32::Thread() {
 		}
 	}
 
-	FILE_LOG(logINFO) << "stopping soundcard" ;
+	LOG_INFO("stopping soundcard" )
 	/* stop waveIn */
 	waveInStop(hwi);
 	Sleep(1000) ;
-	FILE_LOG(logINFO) << "soundcard stopped"  ;
+	LOG_INFO("soundcard stopped"  )
 
 	return NULL;
 }
@@ -267,7 +266,7 @@ void MonitorAudioWin32::waveInErrorMsg(MMRESULT result, std::string addstr)
 	if (result != MMSYSERR_NOERROR) {
 		char errorbuffer[100];
 		waveInGetErrorText (result, errorbuffer, 100);
-		FILE_LOG(logERROR) << "[WINMM] Error " << result << ":" << errorbuffer << " (" << addstr << ")" ;
+		LOG_ERROR("[WINMM] Error " << result << ":" << errorbuffer << " (" << addstr << ")" )
 	}
 }
 

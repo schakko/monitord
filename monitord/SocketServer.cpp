@@ -75,15 +75,15 @@ SocketServer::SocketServer(MonitorConfiguration *config, std::string FilterFileN
 
 				if (lua_pcall(L, 0, 0, 0))
 				{
-					FILE_LOG(logERROR) << "LUA test fehlgeschlagen" << endl ;
+					LOG_ERROR("LUA test fehlgeschlagen" << endl )
 				}
 
 				m_bUseLUAScript=true ;
-				FILE_LOG(logINFO) << "Successfully loaded LUA filter: " << FilterFileName ;
+				LOG_INFO("Successfully loaded LUA filter: " << FilterFileName )
 			}
 			catch (const std::string &e)
 			{
-				FILE_LOG(logERROR) << "Error loading lua script: "  << e;
+				LOG_ERROR("Error loading lua script: "  << e)
 			}
 
 		#endif
@@ -268,7 +268,7 @@ void *SocketServer::Thread()
 
 				socklen_t sin_size = sizeof (sockaddr_in);
 				int fd = accept(m_sock,(sockaddr*) &socketThread[useSocket]->m_client,&sin_size);
-				FILE_LOG(logINFO) << "new connection from " << inet_ntoa(socketThread[useSocket]->m_client.sin_addr) ;
+				LOG_INFO("new connection from " << inet_ntoa(socketThread[useSocket]->m_client.sin_addr) )
 
 				// Thread mit dem oben angenommenen Socket starten
 				socketThread[useSocket]->setFD(fd) ;
@@ -281,16 +281,16 @@ void *SocketServer::Thread()
 	closesocket( m_sock);
 
 	// Alle Clients beenden
-	FILE_LOG(logINFO) << "Beende alle Clients"  ;
+	LOG_INFO("Beende alle Clients"  )
 	for (int i=0;i<MAX_CLIENTS;++i)
 	{
-		FILE_LOG(logDEBUG) << "beende client " << i  ;
+		LOG_DEBUG("beende client " << i)
 		if (socketThread[i]->IsRunning())
 		{
 			socketThread[i]->closeSocket() ;
-			FILE_LOG(logINFO) << i << ": closesocket done" ;
+			LOG_INFO(i << ": closesocket done" )
 			socketThread[i]->Kill() ;
-			FILE_LOG(logINFO) << i << ": kill done" ;
+			LOG_INFO(i << ": kill done" )
 		}
 	}
 
@@ -435,19 +435,19 @@ void SocketServer::addResult(ModuleResultBase* pRes)
 
 				      /* do the call (2 arguments, 1 result) */
 				      if (lua_pcall(L, 0, LUA_MULTRET, 0) != 0) {
-				      	FILE_LOG(logERROR) << "Fehler beim Aufruf lua dispatcher script:" << lua_tostring(L, -1);
+				      	LOG_ERROR("Fehler beim Aufruf lua dispatcher script:" << lua_tostring(L, -1))
 				        //error(L, "error running function `f': %s",
 				        //         lua_tostring(L, -1));
 					  }
 
 				      /* retrieve result */
 				      if (!lua_isnumber(L, -1)) {
-				      	FILE_LOG(logERROR) << "nicht-numerische Antwort vom lua dispatcher script" ;
+				      	LOG_ERROR("nicht-numerische Antwort vom lua dispatcher script" )
 				        //error(L, "function `f' must return a number");
 					  }
 				      z = lua_tonumber(L, -1);
 				      lua_pop(L, 1);  /* pop returned value */
-					  FILE_LOG(logDEBUG1) << "lua Result (global dispatcher)" << z ;
+					  LOG_DEBUG("lua Result (global dispatcher)" << z) 
 
 					  if (z==1) m_bSkipDispatching=true ;
 				}
@@ -548,7 +548,7 @@ void *SocketThread::Thread()
 	createLock() ;
 	createSocket() ;
 
-	FILE_LOG(logINFO) << "SocketThreads exits" ;
+	LOG_INFO("SocketThreads exits" )
 
 	releaseLock() ;
 	return NULL;
@@ -617,7 +617,7 @@ void SocketThread::say(const std::string& something)
 	unsigned int len=send( m_fd, something.c_str(), something.length(), 0);
 	if (len!=something.length())
 	{
-		FILE_LOG(logERROR) << "error sending date to client. thread exiting"  ;
+		LOG_ERROR("error sending date to client. thread exiting"  )
 		doLogout() ;
 	}
 }
@@ -627,7 +627,7 @@ void SocketThread::say(const char *something)
 	unsigned int len = send( m_fd, something, strlen(something), 0);
 	if (len!=strlen(something))
 	{
-		FILE_LOG(logERROR) << "error sending date to client. thread exiting"  ;
+		LOG_ERROR("error sending date to client. thread exiting"  )
 		doLogout() ;
 	}
 }
@@ -674,7 +674,7 @@ void SocketThread::createSocket()
 	// Gültige IP Adresse, die sich nicht anmelden muss ?
 	if (m_MonitorConfiguration->IsValidLogin("","",this->m_sClientIP))
 	{
-		FILE_LOG(logINFO) << "login authentication (ip allowed): " << m_sClientIP ;
+		LOG_INFO("login authentication (ip allowed): " << m_sClientIP )
 		this->m_authenticated=true ;
 	}
 
@@ -718,20 +718,20 @@ void SocketThread::createSocket()
 
 		if (FD_ISSET(m_fd,&fdset)>0) // Socket ereignis ?
 		{
-			FILE_LOG(logDEBUG) << "Socket reports read event" ;
+			LOG_DEBUG("Socket reports read event") 
 			result=1 ;
 		}
 
 		if (FD_ISSET(m_fd,&fdset_write)>0) // Problem ?
 		{
-			FILE_LOG(logDEBUG) << "Socket reports write event" ;
+			LOG_DEBUG("Socket reports write event") 
 			result=0 ;
 			//m_exitThread=true ;
 		}
 
 		if (FD_ISSET(m_fd,&fdset_exceptions)>0) // Problem ?
 		{
-			FILE_LOG(logDEBUG) << "Socket reports exception event" ;
+			LOG_DEBUG("Socket reports exception event")
 			result=0 ;
 			m_exitThread=true ;
 		}
@@ -744,7 +744,7 @@ void SocketThread::createSocket()
 			gelesen=recv (m_fd, buffer, RECV_BUFFER-1, 0) ;
         	if (gelesen<=0) // Nix am Port, aber doch Port Event ?
 			{
-				FILE_LOG(logINFO) << "recv()<=0 => socketthread exiting"  ;
+				LOG_INFO("recv()<=0 => socketthread exiting"  )
 				m_exitThread=true ;
 			}
 			buffer[gelesen]='\0';
@@ -848,7 +848,7 @@ MonitorSocketsManager* GetSocketsManager() {
 
 MonitorSocketsManager::MonitorSocketsManager()
 {
-	FILE_LOG(logDEBUG) << "SocketManager erstellt"  ;
+	LOG_DEBUG("SocketManager erstellt")
 
 	if ( memLockCreate( 12347, & m_MemLock) < 0) {
    		ThrowMonitorException("SocketsManager: memLockCreate failed") ;

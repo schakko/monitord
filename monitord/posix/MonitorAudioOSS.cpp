@@ -23,7 +23,7 @@ MonitorAudioOSS::~MonitorAudioOSS() {
 
 bool MonitorAudioOSS::Start(void *format) {
 	if (InitDevice() < 0) {
-		FILE_LOG(logERROR) << "Error initializing PCM device " << pcm_name ;
+		LOG_ERROR("Error initializing PCM device " << pcm_name )
 		exit(10);
 	}
 
@@ -33,7 +33,7 @@ bool MonitorAudioOSS::Start(void *format) {
 }
 
 void MonitorAudioOSS::Stop() {
-	FILE_LOG(logERROR) << "stopping " << pcm_name ;
+	LOG_ERROR("stopping " << pcm_name )
 	run = false;
 }
 
@@ -45,25 +45,24 @@ int MonitorAudioOSS::InitDevice() {
 	}
 
 	if ((dev_handle = open(pcm_name.c_str(), O_RDONLY)) < 0) {
-		FILE_LOG(logERROR) << "open" ;
+		LOG_ERROR("open" )
 		return -1;
 	}
 	sndparam = AFMT_S16_LE; /* we want 16 bits/sample signed */
 	/* little endian; works only on little endian systems! */
 	if (ioctl(dev_handle, SNDCTL_DSP_SETFMT, &sndparam) == -1) {
-		FILE_LOG(logERROR) << "ioctl: SNDCTL_DSP_SETFMT";
+		LOG_ERROR("ioctl: SNDCTL_DSP_SETFMT")
 		return -1;
 	}
 
 	sndparam = 1;   /* 2 Kanäle */
 	if (ioctl(dev_handle, SNDCTL_DSP_STEREO, &sndparam) == -1) {
-		FILE_LOG(logERROR) << ("ioctl: SNDCTL_DSP_STEREO");
+		LOG_ERROR(("ioctl: SNDCTL_DSP_STEREO"))
 		return -1;
 	}
 	if (sndparam != 1) {
 		/*	Monovariante?	*/
-		FILE_LOG(logERROR) << "soundif: Error, cannot set the channel " <<
-				"number to 2";
+		LOG_ERROR("soundif: Error, cannot set the channel number to 2")
 		return -1;
 	}
 
@@ -81,12 +80,12 @@ void *MonitorAudioOSS::Thread() {
 	short *temp_buffer;
 	float *left, *right;
 	if ((temp_buffer = (short*) malloc(audio_buffer->SampleLen * sizeof (short) * 2)) == NULL) {
-	FILE_LOG(logERROR) << "cannot allocate temporary audio buffer";
+	LOG_ERROR("cannot allocate temporary audio buffer")
 		exit (-1);
 	}
 
 	JThread::ThreadStarted();
-	FILE_LOG(logINFO) << "AudioThread " << pcm_name << " is running" ;
+	LOG_INFO("AudioThread " << pcm_name << " is running" )
 
 	while(run) {
 		bytes = read(dev_handle, temp_buffer, audio_buffer->SampleLen * sizeof (short) * 2);
@@ -108,12 +107,12 @@ void *MonitorAudioOSS::Thread() {
 			CloseDevice();
 			sleep(1);
 			if (InitDevice() < 0) {
-				FILE_LOG(logERROR) << "Error initializing PCM device "<< pcm_name ;
+				LOG_ERROR("Error initializing PCM device "<< pcm_name )
 			}
 		}
 	}
 
-	FILE_LOG(logINFO) << "AudioThread " << pcm_name << " has stopped" ;
+	LOG_INFO("AudioThread " << pcm_name << " has stopped" )
 
 	free(temp_buffer);
 	return NULL;

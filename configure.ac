@@ -58,7 +58,28 @@ if test x$WINDOWS != xtrue; then
 fi
 AM_CONDITIONAL(ALSA, test x$HAVE_ALSA = xyes)
 
+AC_ARG_WITH([log4cxx],
+	[AC_HELP_STRING([--with-log4cxx],
+		[enable log4cxx support (default is no)])],
+	[
+		(use_log4cxx=$withval)
+		HAVE_LOG4CXX=yes
+		AC_DEFINE([HAVE_LOG4CXX], [1], [defines that you have log4cxx])
+	],
+	[use_log4cxx=no])
 
+AM_CONDITIONAL(LOG4CXX, test x$HAVE_LOG4CXX = xyes)
+
+AC_ARG_WITH([log4cxx-includes],
+	AC_HELP_STRING([--with-log4cxx-includes=PFX], [Prefix where log4cxx header files are]),
+	[gccLog4cxxIncludes="$withval"
+		AC_SUBST(LOG4CXX_INCLUDE, "$gccLog4cxxIncludes")],)
+
+AC_ARG_WITH([log4cxx-libraries],
+	AC_HELP_STRING([--with-log4cxx-libraries=PFX], [Prefix where where libraries for log4cxx are. In the most environments, this must be set]),
+	[gccLog4cxxLibraries="$withval"
+		AC_SUBST(LOG4CXX_LIBS, "$gccLog4cxxLibraries")],)
+		
 if test x$WINDOWS != xtrue; then
 	# Linux OS:
 	# First check for libm - otherwise libmp3lame will always fail

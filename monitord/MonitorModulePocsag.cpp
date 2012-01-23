@@ -162,7 +162,7 @@ void MonitorModulePocsag::do_one_bit(struct rx *rx, unsigned long rx_data)
 			rx->rx_sync = 2 ; // war: 10 -- vielleicht auch 4/5/6 ?
 			rx->rx_bit = rx->rx_word = 0;
 			rx->func = -1;
-			FILE_LOG(logDEBUG)<< "Sync gefunden\n" ;
+			LOG_DEBUG("Sync gefunden")
 			//TRACE0("Sync gefunden\n") ;
 			m_iPreambelLen =0 ;
 			m_bRXmode=true ;
@@ -399,8 +399,7 @@ void MonitorModulePocsag::printmessage(struct MonitorModulePocsag::rx *rx)
 	pRes->set("ric",Adresse) ;
 	pRes->set("text",message) ;
 
-	FILE_LOG(logDEBUG) << "Debug(POCSAG):" << endl << (*pRes) ;
-
+	pRes->Dump();
 
 	GlobalDispatcher->addResult(pRes) ;
 

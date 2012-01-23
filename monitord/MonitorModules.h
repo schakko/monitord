@@ -74,7 +74,7 @@ inline float mac( float *a,  float *b, unsigned int size) {
 	float sum = 0;
 	unsigned int i;
 
-	FILE_LOG(logDEBUG2) << "processing mac() Block with size=" << size ;
+	LOG_DEBUG("processing mac() Block with size=" << size) 
 	for (i = 0; i < size; i++)
 		sum += (*a++) * (*b++);
 	return sum;

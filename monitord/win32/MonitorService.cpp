@@ -95,7 +95,7 @@ void WINAPI MonitorService::ServiceMain(DWORD argc, PSTR* argv)
     // process terminate. The SCM will diligently log this event.
     //
 
-	FILE_LOG(logINFO) << "ServiceMain Startet"  ;
+	LOG_INFO("ServiceMain Startet"  )
     assert (0 != m_service);
 
     if (1 != argc || 0 == argv || 0 == argv[0])
@@ -131,7 +131,7 @@ void WINAPI MonitorService::ServiceMain(DWORD argc, PSTR* argv)
 void WINAPI MonitorService::Handler(DWORD control)
 {
 	#ifdef _DEBUG
-	FILE_LOG(logINFO) << "Handler: empfangen:" << control << ".." << m_service  ;
+	LOG_INFO("Handler: empfangen:" << control << ".." << m_service  )
 	#endif
     //assert (0 == m_service);
         switch (control)
@@ -153,7 +153,7 @@ void WINAPI MonitorService::Handler(DWORD control)
             case SERVICE_CONTROL_SHUTDOWN :
             case SERVICE_CONTROL_STOP :
             {
-            	FILE_LOG(logINFO) <<  "ServiceMain stopping ...  " ;
+            	LOG_INFO( "ServiceMain stopping ...  " )
                 m_service->Stop();
                 break;
             }
@@ -169,7 +169,7 @@ void WINAPI MonitorService::Handler(DWORD control)
 void MonitorService::UpdateState(DWORD state, HRESULT errorCode)
 {
 	#ifdef _DEBUG
-	FILE_LOG(logDEBUG) <<  "Updatestatus ..."  ;
+	LOG_DEBUG("Updatestatus ..."  )
 	#endif
 
     //assert (0 != m_service);
@@ -195,7 +195,7 @@ void MonitorService::UpdateState(DWORD state, HRESULT errorCode)
             // FIXME AtlThrowLastWin32();
         }
 
-        FILE_LOG(logDEBUG) <<  "Updatestatus ... done"  ;
+        LOG_DEBUG("Updatestatus ... done"  )
 
 }
 

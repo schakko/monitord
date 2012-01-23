@@ -13,7 +13,7 @@ MonitorAudioALSA::~MonitorAudioALSA() {
 
 bool MonitorAudioALSA::Start(void *format) {
 	if (InitDevice() < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error initializing PCM device " << pcm_name;
+		LOG_ERROR("[ALSA] Error initializing PCM device " << pcm_name)
 		exit(10);
 	}
 
@@ -28,7 +28,7 @@ void MonitorAudioALSA::Stop() {
 
 int MonitorAudioALSA::InitDevice() {
 	if ((pcm_name.length() == 0) || (pcm_rate == 0)) {
-		FILE_LOG(logERROR) << "[ALSA] InitDevice Argument Error: pcm_name=" << pcm_name << " pcm_rate=" << pcm_rate ;
+		LOG_ERROR("[ALSA] InitDevice Argument Error: pcm_name=" << pcm_name << " pcm_rate=" << pcm_rate )
 		return -1;
 	}
 
@@ -53,13 +53,13 @@ int MonitorAudioALSA::InitDevice() {
 	/* been completely processed by the soundcard.                */
 	ret = snd_pcm_open(&pcm_handle, pcm_name.c_str(), pcm_stream, 0);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error opening PCM device " << pcm_name << " ret:" << ret << snd_strerror(ret);
+		LOG_ERROR("[ALSA] Error opening PCM device " << pcm_name << " ret:" << ret << snd_strerror(ret))
 		return -1;
 	}
 	/* Init hwparams with full configuration space */
 	ret = snd_pcm_hw_params_any(pcm_handle, hwparams);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Can not configure this PCM device " << pcm_name << ". " << ret << "(" << snd_strerror(ret) << ")" ;
+		LOG_ERROR("[ALSA] Can not configure this PCM device " << pcm_name << ". " << ret << "(" << snd_strerror(ret) << ")" )
 		return -1;
 	}
 	/* Set access type. This can be either    */
@@ -70,20 +70,20 @@ int MonitorAudioALSA::InitDevice() {
 	/* of this introduction.                  */
 	ret = snd_pcm_hw_params_set_access(pcm_handle, hwparams, SND_PCM_ACCESS_RW_NONINTERLEAVED);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error setting access " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")";
+		LOG_ERROR("[ALSA] Error setting access " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")")
 		return -1;
 	}
 	/* Set number of channels */
 	ret = snd_pcm_hw_params_set_channels(pcm_handle, hwparams, 2);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error setting channels " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")";
+		LOG_ERROR("[ALSA] Error setting channels " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")")
 		return -1;
 	}
 	/* Set sample rate. If the exact rate is not supported */
 	/* by the hardware, use nearest possible rate.         */
 	ret = snd_pcm_hw_params_set_rate_near(pcm_handle, hwparams, &pcm_rate, &direction);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error setting rate " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")";
+		LOG_ERROR("[ALSA] Error setting rate " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")")
 		return -1;
 	}
 	/* Set sample format */
@@ -91,26 +91,26 @@ int MonitorAudioALSA::InitDevice() {
 	ret = snd_pcm_hw_params_set_format(pcm_handle, hwparams, SND_PCM_FORMAT_FLOAT_LE);
 	//ret = snd_pcm_hw_params_set_format(pcm_handle, hwparams, SND_PCM_FORMAT_S16_LE);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error setting format " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")";
+		LOG_ERROR("[ALSA] Error setting format " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")")
 		return -1;
 	}
 	/* Set buffer size */
 	ret = snd_pcm_hw_params_set_buffer_size_near(pcm_handle, hwparams, &pcm_buffer_size);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error setting buffer size " <<	pcm_name << ". " <<  (int)pcm_buffer_size << " - " << ret <<"(" << snd_strerror(ret)<<")";
+		LOG_ERROR("[ALSA] Error setting buffer size " <<	pcm_name << ". " <<  (int)pcm_buffer_size << " - " << ret <<"(" << snd_strerror(ret)<<")")
 	}
 	/* Set number of periods. Periods used to be called fragments. */
 	ret = snd_pcm_hw_params_set_periods_near(pcm_handle, hwparams, &periods, &direction);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error setting periods  " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")";
+		LOG_ERROR("[ALSA] Error setting periods  " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")")
 	}
-	FILE_LOG(logINFO) << "[ALSA] Using pcm_buffer_size=" <<(int)pcm_buffer_size << " periods=" << periods ;
+	LOG_INFO("[ALSA] Using pcm_buffer_size=" <<(int)pcm_buffer_size << " periods=" << periods )
 
 	/* Apply HW parameter settings to */
 	/* PCM device and prepare device  */
 	ret = snd_pcm_hw_params(pcm_handle, hwparams);
 	if (ret < 0) {
-		FILE_LOG(logERROR) << "[ALSA] Error setting HW params " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")";
+		LOG_ERROR("[ALSA] Error setting HW params " <<	pcm_name << ". " << ret <<"(" << snd_strerror(ret)<<")")
 		return -1;
 	}
 
@@ -136,15 +136,15 @@ void* MonitorAudioALSA::Thread() {
 		} else if (num_samples == -EPIPE) {
 			int err = snd_pcm_prepare(pcm_handle);
 			if (err < 0) {
-				FILE_LOG(logERROR) << "[ALSA] Can't recovery from underrun, prepare failed: " << snd_strerror(err);
+				LOG_ERROR("[ALSA] Can't recovery from underrun, prepare failed: " << snd_strerror(err))
 			}
 		} else if (num_samples < 0) {
-			FILE_LOG(logERROR) <<  "[ALSA] Read error " <<  num_samples << "(" << snd_strerror(num_samples) << ")" ;
+			LOG_ERROR( "[ALSA] Read error " <<  num_samples << "(" << snd_strerror(num_samples) << ")" )
 			/*	Schliessen des Sounddevices und neustarten	*/
 			CloseDevice();
 			sleep(1);
 			if (InitDevice() < 0) {
-				FILE_LOG(logERROR) << "[ALSA] Error initializing PCM device " << pcm_name ;
+				LOG_ERROR("[ALSA] Error initializing PCM device " << pcm_name )
 			}
 		}
 	}

@@ -697,8 +697,8 @@ void MonitorModuleZVEI::DisplayResult(std::string Adresse,int typ, std::string T
 	pRes->set("zvei",Adresse) ;
 	pRes->set("weckton",alarmTypString) ;
 	pRes->set("text",Text) ;
-
-	FILE_LOG(logDEBUG) << endl << (*pRes) ;
+	pRes->Dump();
+	
 	GlobalDispatcher->addResult(pRes) ;
 }
 

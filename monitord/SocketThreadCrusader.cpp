@@ -110,7 +110,7 @@ void SocketThreadCrusader::processInput()
 			/* Status im Crusader manuell gesetzt:
 			 * 23.07.08#![]!#22:19:36#![]!#93185811#![]!#7#![]!#true#![]!#false#![]!#3#![]!#1#![]!#false#![]!#true#![]!#-1#![]!#7 TelegrammText#![]!#
 			 */
-			 FILE_LOG (logDEBUG) << "manueller Status von Crusader Client empfangen.";
+			 LOG_DEBUG("manueller Status von Crusader Client empfangen.")
 
 			/* es wird nur FMS betrachtet */
 			pfms->set ("typ", "fms");
@@ -156,11 +156,12 @@ void SocketThreadCrusader::processInput()
 			position = Kommando.find_first_of(CRUSADER_DELIMITER, position) + 6;
 			pfms->set ("textuebertragung", Kommando.substr(position, Kommando.find_first_of(CRUSADER_DELIMITER, position) - position));
 
-			FILE_LOG(logDEBUG) << "Debug(FMS vom Crusader):" << endl << (*pfms);
+			LOG_DEBUG("Debug(FMS vom Crusader):")
+			pfms->Dump();
 
 			GlobalDispatcher->addResult (pfms);
 		} else {
-			FILE_LOG (logDEBUG) << "received from Crusader: " <<  m_CommandBuffer ;
+			LOG_DEBUG("received from Crusader: " <<  m_CommandBuffer) 
 		}
 }
 
@@ -169,9 +170,9 @@ void SocketThreadCrusader::checkLogin(std::string password)
 	if (m_MonitorConfiguration->IsValidLogin(m_MonitorConfiguration->m_crusaderUsername,password,m_sClientIP))
 	{
 		m_authenticated=true ;
-		FILE_LOG(logINFO) << "login accepted (crusader pw allowed): from ip " << m_sClientIP ;
+		LOG_INFO("login accepted (crusader pw allowed): from ip " << m_sClientIP)
 	} else {
-		FILE_LOG(logINFO) << "login denied (crusader pw not allowed): " << password << " from ip " << m_sClientIP ;
+		LOG_INFO("login denied (crusader pw not allowed): " << password << " from ip " << m_sClientIP)
 	}
 }
 

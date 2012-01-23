@@ -29,7 +29,10 @@
 #include "lua.hpp"
 
 using namespace std ;
-
+#ifdef HAVE_LOG4CXX
+using namespace log4cxx;
+using namespace log4cxx::helpers;
+#endif // HAVE_LOG4CXX
 void Monitor::CreateSocketServer(MonitorConfiguration *config)
 {
 	static SocketServer socketServer(config,0) ;
@@ -48,10 +51,10 @@ void Monitor::CreateSocketServer(MonitorConfiguration *config)
 
 void Monitor::Initialize (int argc, char *argv[])
 {
-   m_bWantStop=false;
-   if ( memLockCreate( 12345, & s) < 0) {
-   		ThrowMonitorException("memLockCreate failed") ;
-    }
+	m_bWantStop=false;
+	if ( memLockCreate( 12345, & s) < 0) {
+		ThrowMonitorException("memLockCreate failed") ;
+	}
 
 	m_MonitorConfig.ParseCommandline(argc,argv) ;
  	m_MonitorConfig.ReadConfiguration(m_MonitorConfig.m_ConfigFile) ;
@@ -60,17 +63,37 @@ void Monitor::Initialize (int argc, char *argv[])
 
 void initFileLogging(MonitorConfiguration *config)
 {
+	bool bConfigureReportingLevel = true;
 
-	if (!(config->m_sLogfile=="screen"))
+	if (!(config->m_sLogfile=="screen") && !(config->m_sLogfile=="log4cxx"))
 	{
 		FILE* pFile = fopen(config->m_sLogfile.c_str(), "a");
 		Output2FILE::Stream() = pFile;
-		FILE_LOG(logINFO) << "monitord restarted - logging with loglevel " << config->m_sLoglevel;
-	} else {
-		FILE_LOG(logINFO) << "Logging with loglevel " << config->m_sLoglevel;
+		LOG_INFO("monitord restarted - logging with loglevel " << config->m_sLoglevel)
+	}
+	else if (config->m_sLogfile=="log4cxx") {
+		#ifdef HAVE_LOG4CXX
+			cout << "using log4cxx for further logging..." << endl;
+
+			if (config->m_sLogConfigurationFile=="") {
+				BasicConfigurator::configure();
+			}
+			else {	
+				cout << "using log4cxx configuration file '" << config->m_sLogConfigurationFile << "'" << endl;
+				PropertyConfigurator::configure(config->m_sLogConfigurationFile);
+			}
+			bConfigureReportingLevel = false;
+		#else
+			LOG_ERROR("log4cxx can not be used. monitord is not compiled --with-log4cxx")
+		#endif		
+	}
+	else {
+		LOG_INFO("Logging with loglevel " << config->m_sLoglevel)
 	}
 
-	FILELog::ReportingLevel() = FILELog::FromString(config->m_sLoglevel);
+	if (bConfigureReportingLevel) {
+		FILELog::ReportingLevel() = FILELog::FromString(config->m_sLoglevel);
+	}
 }
 
 int main(int argc, char** argv)
@@ -89,20 +112,20 @@ int main(int argc, char** argv)
 		try
 		{
 			if (m_monitor.m_MonitorConfig.m_service_uninstall == true) {
-				FILE_LOG(logINFO) << PACKAGE_NAME << " wird als Dienst entfernt.";
+				LOG_INFO(PACKAGE_NAME << " wird als Dienst entfernt.")
 				/* uninstall service from service control daemon */
 				MonitorService *m_MonitorService = new MonitorService(&m_monitor);
 				m_MonitorService->UnInstallService();
 				delete m_MonitorService;
 			} else if (m_monitor.m_MonitorConfig.m_service_install == true) {
-				FILE_LOG(logINFO) << PACKAGE_NAME << " wird als Dienst eingerichtet.";
+				LOG_INFO(PACKAGE_NAME << " wird als Dienst eingerichtet.")
 				/* install service in service control daemon */
 				MonitorService *m_MonitorService = new MonitorService(&m_monitor);
 				m_MonitorService->InstallService();
 				delete m_MonitorService ;
 			} else {
 				if (m_monitor.m_MonitorConfig.m_service_run == true) {
-					FILE_LOG(logINFO) << PACKAGE_NAME << " startet als Dienst.";
+					LOG_INFO(PACKAGE_NAME << " startet als Dienst.")
 					/* running monitor as windows service application */
 					MonitorService *m_MonitorService = new MonitorService(&m_monitor);
 					m_MonitorService->Run ();
@@ -110,10 +133,10 @@ int main(int argc, char** argv)
 				} else {
 	#endif
 				/* running monitor as command line application */
-				FILE_LOG(logINFO) << PACKAGE_STRING << " READY" ;
+				LOG_INFO(PACKAGE_STRING << " READY" )
 				cout << PACKAGE_STRING << " running...\r\n";
-				if (!(m_monitor.m_MonitorConfig.m_sLogfile == "screen")) {
-					cout << "Logging in Logfiles, keine weiteren Ausgaben hier.";
+				if (!(m_monitor.m_MonitorConfig.m_sLogfile == "screen") && !(m_monitor.m_MonitorConfig.m_sLogfile == "log4cxx")) {
+					cout << "Logging in Logfiles, keine weiteren Ausgaben hier." << endl;
 				}
 				m_monitor.MainLoop ();
 	#ifdef WIN32
@@ -123,13 +146,13 @@ int main(int argc, char** argv)
 		{
 			// FIXME: Dienste koennen nicht auf die Console schreiben, da siehe
 			// unsichtbar im Hintergrund laufen
-			FILE_LOG(logERROR) << err.what() ;
+			LOG_ERROR(err.what() )
 		}
 	#endif
 
 	} catch (MonitorException(err))
 	{
-		FILE_LOG(logERROR) << err.what() ;
+		LOG_ERROR(err.what() )
 	}
 }
 
@@ -144,18 +167,18 @@ void Monitor::MainLoop()
 
 	static SocketServer socketServer(&m_MonitorConfig,m_MonitorConfig.m_socketFilterFileName ,0) ;
 	socketServer.Start() ;
-	FILE_LOG(logINFO) << "monitord socketserver started" ;
+	LOG_INFO("monitord socketserver started" )
 
 
 	static SocketServer fms32ProServer(&m_MonitorConfig,m_MonitorConfig.m_socketFilterFileName ,1000) ;
 	fms32ProServer.m_ServerModus=SocketThread::fms32pro ;
 	fms32ProServer.Start() ;
-	FILE_LOG(logINFO) << "fms32pro socketserver started" ;
+	LOG_INFO("fms32pro socketserver started" )
 
 	static SocketServer crusaderServer(&m_MonitorConfig,m_MonitorConfig.m_socketFilterFileName ,2000) ;
 	crusaderServer.m_ServerModus=SocketThread::crusader ;
 	crusaderServer.Start() ;
-	FILE_LOG(logINFO) << "crusader socketserver started" ;
+	LOG_INFO("crusader socketserver started" )
 
 
 	/*******************************************************/
@@ -164,7 +187,7 @@ void Monitor::MainLoop()
 	//GetPluginsManager().loadPlugin("plugins/.libs/libmplugin_mysql-0.dll",NULL);
 	GetPluginsManager().loadScriptFilter(m_MonitorConfig.m_pluginFilterFileName) ;
 	GetPluginsManager().loadPluginsFromConfigNode(&m_MonitorConfig.m_configDataPlugins);
-	FILE_LOG(logDEBUG) << "PluginManager started" ;
+	LOG_DEBUG("PluginManager started" )
 	#endif
 	/*********************************************************/
 
@@ -190,20 +213,20 @@ void Monitor::MainLoop()
 		// Wie man sieht: hier gibt es im Moment nichts zu tun :-
 	}
 
-	FILE_LOG(logINFO) << PACKAGE_NAME << " shutting down..."  ;
+	LOG_INFO(PACKAGE_NAME << " shutting down..."  )
 	StopSndCard() ;
 
-	FILE_LOG(logINFO) << "stopping socketserver monitord";
+	LOG_INFO("stopping socketserver monitord")
 	socketServer.m_bWantStop=true ;
-	FILE_LOG(logINFO) << "stopping socketserver FMS32";
+	LOG_INFO("stopping socketserver FMS32")
 	fms32ProServer.m_bWantStop=true ;
-	FILE_LOG(logINFO) << "stopping socketserver Crusader";
+	LOG_INFO("stopping socketserver Crusader")
 	crusaderServer.m_bWantStop=true ;
 
 	usleep(1000) ;
 	m_SignalStopped->SetSignal() ;
 	usleep(500) ;
-	FILE_LOG(logINFO) << "all done. " << PACKAGE_NAME << " exiting";
+	LOG_INFO("all done. " << PACKAGE_NAME << " exiting")
 }
 
 void Monitor::InitSndCard()
@@ -214,7 +237,7 @@ void Monitor::InitSndCard()
 		if (m_MonitorConfig.m_sndConfig[cardnum].iAktiv==1)
 		{
 			m_sndIn[cardnum] = new CSndPipe();
-			FILE_LOG(logINFO) << "starting soundcard #" << cardnum  ;
+			LOG_INFO("starting soundcard #" << cardnum)
 			m_sndIn[cardnum]->initDecoderModules(cardnum,&m_MonitorConfig) ;
 			m_sndIn[cardnum]->m_SoundIn.setDevice(m_MonitorConfig.m_sndConfig[cardnum].sDevice, 22050) ;
 
@@ -222,7 +245,7 @@ void Monitor::InitSndCard()
 			  m_sndIn[cardnum]->loadPlugins(&m_MonitorConfig, m_MonitorConfig.m_sndConfig[cardnum].configChannel[0],m_MonitorConfig.m_sndConfig[cardnum].configChannel[1]) ;
 			#endif
 			m_sndIn[cardnum]->m_SoundIn.Start() ;
-			FILE_LOG(logINFO) << "Soundcard #" << cardnum << " started - complete"  ;
+			LOG_INFO("Soundcard #" << cardnum << " started - complete"  )
 		}
 	}
 }
@@ -235,9 +258,9 @@ void Monitor::StopSndCard()
 	{
 		if (m_MonitorConfig.m_sndConfig[cardnum].iAktiv==1)
 		{
-			FILE_LOG(logINFO) << "stopping soundcard# " << cardnum  ;
+			LOG_INFO("stopping soundcard# " << cardnum  )
 			m_sndIn[cardnum]->m_SoundIn.Stop() ;
-			FILE_LOG(logINFO) << "soundcard #" << cardnum<< " halted."  ;
+			LOG_INFO("soundcard #" << cardnum<< " halted."  )
 			delete m_sndIn[cardnum];
 		}
 	}

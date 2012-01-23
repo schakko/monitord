@@ -52,6 +52,7 @@ public:
 	std::string m_sMonitordName ;
 	std::string m_sLogfile ;
 	std::string m_sLoglevel ;
+	std::string m_sLogConfigurationFile ;
 	bool ReadConfiguration(std::string filename) ;
 	bool ResetConfiguration() ;
 	bool IsValidLogin(std::string loginname, std::string password, std::string host="") ;

@@ -64,6 +64,12 @@ monitord_monitord_SOURCES += \
 endif
 endif
 
+# log4cxx einbinden
+if LOG4CXX
+monitord_monitord_LDFLAGS += @LOG4CXX_LIBS@
+monitord_monitord_CPPFLAGS += -I@LOG4CXX_INCLUDE@
+endif
+
 # LUA Headers und Libs einbinden
 monitord_monitord_CPPFLAGS += @LUA_INCLUDE@
 monitord_monitord_LDFLAGS += @LUA_LIB@

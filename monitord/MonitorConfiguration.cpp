@@ -255,7 +255,7 @@ bool MonitorConfiguration::ReadConfiguration(std::string filename)
 	m_sMonitordName = getNodeText(config,"name","default") ;
 	m_sLogfile = getNodeText(config,"logfile","screen") ;
 	m_sLoglevel = getNodeText(config,"loglevel","INFO") ;
-
+	m_sLogConfigurationFile = getNodeText(config, "log4cxxConfig", "");
 
 	m_socketFilterFileName=getNodeText(config,"SocketFilterScript","") ;
 	m_pluginFilterFileName=getNodeText(config,"PluginFilterScript","") ;
@@ -293,10 +293,6 @@ bool MonitorConfiguration::ReadConfiguration(std::string filename)
 
 	// Datenplugins
 	m_configDataPlugins = config.getChildNode("dataplugins") ;
-	/*if (m_configDataPlugins.isEmpty()==false)
-	{
-		FILE_LOG(logINFO) << "dataplugins found !"  ;
-	}*/
 
 	return true;
 }

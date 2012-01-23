@@ -8,9 +8,9 @@
 DLLManager::DLLManager( const char *fname )
 {
     // Try to open the library now and get any error message.
-	FILE_LOG(logDEBUG) << "calling LoadLibrary.."  ;
+	LOG_DEBUG("calling LoadLibrary..") 
 	h = LoadLibrary(fname);
-	FILE_LOG(logDEBUG) << "LoadLib done."  ;
+	LOG_DEBUG("LoadLib done.")
 	if (h == NULL)
 	{
 
@@ -27,7 +27,7 @@ DLLManager::DLLManager( const char *fname )
 					  0,    			/* Min/Max Buffer size */
 					  NULL);  			/* Arguments */
 
-		FILE_LOG(logERROR) << "Error loading library \"" << fname << "\":" << err  ;
+		LOG_ERROR("Error loading library \"" << fname << "\":" << err  )
 	}
 	else
 	{
@@ -100,7 +100,7 @@ DLLFactoryBase::DLLFactoryBase(
 	{
     	GetSymbol( (void **)&factory_func, factory ? factory : "factory0" );
 	} else {
-		FILE_LOG(logERROR) << "Lasterror=" << LastError()  ;
+		LOG_ERROR("Lasterror=" << LastError()  )
 	}
 
 }

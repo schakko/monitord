@@ -42,13 +42,7 @@ MonitorModulePocsag512::MonitorModulePocsag512(int sampleRate,XMLNode *pConfig)
 	int minpreambel=getNodeInt(*pConfig,"minpreambel",300) ;
 	int maxerrors=getNodeInt(*pConfig,"maxerrors",10) ;
 	int algorithmus=getNodeInt(*pConfig,"algorithm",1) ;
-	FILE_LOG(logINFO) << "(1) sample - crc - ecc - minpreambel - maxerrors - algo:"
-				<< sampleRate << " - "
-				<< crccheck << " - "
-				<< errorcorrection << " - "
-				<< minpreambel << " - "
-				<< maxerrors << " - "
-				<< algorithmus ;
+	LOG_INFO("(1) sample - crc - ecc - minpreambel - maxerrors - algo :" << sampleRate << " - " << crccheck << " - " << errorcorrection << " - " << minpreambel << " - " << maxerrors << " - " << algorithmus)
 	
 	MonitorModulePocsag512(sampleRate,1,0) ;
 	/*
@@ -63,27 +57,21 @@ MonitorModulePocsag512::MonitorModulePocsag512(int sampleRate,XMLNode *pConfig)
 
 MonitorModulePocsag512::MonitorModulePocsag512(int sampleRate, bool crccheck, bool errorcorrection, int minpreambel, int maxerrors, int algorithmus)
 {
-	FILE_LOG(logINFO) << "(2) sample - crc - ecc - minpreambel - maxerrors - algo:"
-				<< sampleRate << " - "
-				<< crccheck << " - "
-				<< errorcorrection << " - "
-				<< minpreambel << " - "
-				<< maxerrors << " - "
-				<< algorithmus ;
+	LOG_INFO("(2) sample - crc - ecc - minpreambel - maxerrors - algo:" << sampleRate << " - " << crccheck << " - " << errorcorrection << " - " << minpreambel << " - " << maxerrors << " - " << algorithmus)
 	m_bErrorCorrection=errorcorrection ;
 	
 	MAX_RX_ERRORS=maxerrors ;
 	PREAMBEL_MINLEN=minpreambel ;
 
 	m_iAlgorithmus=algorithmus ;
-	FILE_LOG(logINFO) << "Algorithmus:" << m_iAlgorithmus ;
+	LOG_INFO("Algorithmus:" << m_iAlgorithmus)
 
 	FREQ_SAMP=sampleRate ;
 
 	SPHASEINC=(0x10000u * BAUD * SUBSAMP) / FREQ_SAMP ;
 	SPHASEINC_BASE=(0x10000u * BAUD * SUBSAMP) / FREQ_SAMP ;
 
-	FILE_LOG(logINFO) << "SPHASE_INC is:" << SPHASEINC_BASE ;
+	LOG_INFO("SPHASE_INC is:" << SPHASEINC_BASE) 
 	m_lpszName="POC 512" ;
  
 	m_fPLLFaktor=PLLFaktor ; // max. Prozent-�nderungen Frq.-�nderung am PLL
@@ -245,7 +233,6 @@ void MonitorModulePocsag512::demod_se(float *buffer, int length)
 		
 		if (sphase>=0x10000u)
 		{
-			// FILE_LOG(logINFO) << "sphase:" << sphase << " -> " << (sphase & (0xffff)) ;
 			sphase = sphase & 0xffffu ;
 			didBit = false ;
 		}

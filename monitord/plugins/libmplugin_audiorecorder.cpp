@@ -60,6 +60,7 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 			logLevel=getNodeText(parameters,"loglevel","INFO") ;
 		}
 
+		// TODO log4cxx
 		#ifdef WIN32
 		if (!(logFile=="screen"))
 		{
@@ -67,14 +68,14 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 			Output2FILE::Stream() = pFile;
 		}
 		FILELog::ReportingLevel() = FILELog::FromString(logLevel);
-		FILE_LOG(logINFO) << "logging started";
+		LOG_INFO("logging started")
 		#endif
 
 		#ifdef HAVE_LIBMP3LAME
 
 		try {
-			FILE_LOG(logINFO) << "enabling lame mp3 support"  ;
-			FILE_LOG(logINFO) << "Using MP3Lame Lib Version: " << get_lame_version() ;
+			LOG_INFO("enabling lame mp3 support")
+			LOG_INFO("Using MP3Lame Lib Version: " << get_lame_version())
 
 			gfp=lame_init() ;
 			if (gfp==NULL)
@@ -99,7 +100,7 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 			}
 		} catch (MonitorException e)
 		{
-			FILE_LOG(logERROR) << e.what() ;
+			LOG_ERROR(e.what())
 		}
 		#endif
 
@@ -108,7 +109,7 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 
 	virtual void Show()
 	{
-		FILE_LOG(logINFO) << "MonitorAudioPluginRecorder successfully loaded"  ;
+		LOG_INFO("MonitorAudioPluginRecorder successfully loaded")
 	}
 
 	virtual void WriteRAWToFile (FILE *pFile,SHORT buffer[],unsigned int bufferSize)
@@ -116,7 +117,7 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 		size_t len=fwrite(buffer, sizeof(SHORT), bufferSize,pFile);
 		if (len!=bufferSize)
 		{
-			FILE_LOG(logERROR) << "Fehler beim Schreiben: " << len << " statt " << bufferSize  ;
+			LOG_ERROR("Fehler beim Schreiben: " << len << " statt " << bufferSize)
 			// Fehler beim Schreiben ?
 		}
 	}
@@ -126,7 +127,7 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 		size_t len=fwrite(buffer, sizeof(unsigned char), bufferSize,pFile);
 		if (len!=bufferSize)
 		{
-			FILE_LOG(logERROR) << "Fehler beim Schreiben: " << len << " statt " << bufferSize  ;
+			LOG_ERROR("Fehler beim Schreiben: " << len << " statt " << bufferSize)
 			// Fehler beim Schreiben ?
 		}
 	}
@@ -196,10 +197,10 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 
 	void StartRecording(int jobID,std::string fname,int Sekunden)
 	{
-		FILE_LOG(logINFO) << "Starte Aufnahme .."  ;
+		LOG_INFO("Starte Aufnahme ..")
 
 		// Aufnahmedatei erzeugen
-		FILE_LOG(logINFO) << "Starte mit dauer:" << Sekunden  ;
+		LOG_INFO("Starte mit dauer:" << Sekunden)
 		if (fname.size()>0)
 		{
 			// Dateiname wurde vorgegeben
@@ -211,11 +212,11 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 		FILE * f_File = fopen(fname.c_str(), "wb");
 
 		if(f_File==NULL) {
-			FILE_LOG(logERROR) << "File ist NICHT erstellt" ;
+			LOG_ERROR("File ist NICHT erstellt")
 		}
 		else
 		{
-			FILE_LOG(logERROR) << "File ist erstellt"<< fname  ;
+			LOG_ERROR("File ist erstellt"<< fname)
 		}
 
 		// Aufnahme starten, Daten beim Job hinterlegen
@@ -231,7 +232,7 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 
 	void StopRecording(int jobID)
 	{
-		FILE_LOG(logINFO) << "Aufnahme beendet"  ;
+		LOG_INFO("Aufnahme beendet")
 
 		FILE* pFile=(FILE*) getCustomValue(jobID) ;
 		std::string fname=getInfoText(jobID) ;
@@ -248,12 +249,12 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 		std::string fname ;
 		int Sekunden=0 ;
 
-		FILE_LOG(logINFO) << "Kommando: " << command ;
+		LOG_INFO("Kommando: " << command)
 		parseCommand(command) ;
 
 		for (int i=0;i<10;i++)
 		{
-			FILE_LOG(logINFO) << "Param " << i << ":" << m_param[i] ;
+			LOG_INFO("Param " << i << ":" << m_param[i])
 		}
 
 		if (m_param[0]=="RECORD") //RECORD:<zeit>
@@ -263,36 +264,36 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 				try
 				{
 					Sekunden=convertToInt(m_param[1]) ;
-					FILE_LOG(logINFO) << "Sekunden als param:" << m_param[1] ;
-					FILE_LOG(logINFO) << "Sekunden als int:" << Sekunden  ;
+					LOG_INFO("Sekunden als param:" << m_param[1])
+					LOG_INFO("Sekunden als int:" << Sekunden)
 				} catch (BadConversion e)
 				{
-					FILE_LOG(logERROR) << "Fehler bei der Datenkonvertierung " << m_param[1]  ;
+					LOG_ERROR("Fehler bei der Datenkonvertierung " << m_param[1])
 					Sekunden=60 ;
 				}
 			}
 
 			int jobID=addClient(pClient) ; //< Auftraggeber, fuer callback mit Result
-			FILE_LOG(logINFO) << "jobID=" << jobID  ;
+			LOG_INFO("jobID=" << jobID)
 
 			// Laeuft mit der jobID schon eine Aufzeichnung ?
 			// Wenn, dann keine neue starten, sondern nur verlaengern
 
 			long SekundenAlterJob = getInfo(jobID) ;
-			FILE_LOG(logINFO) << "Zeitdauer alte Aufnahme:" << SekundenAlterJob  ;
+			LOG_INFO("Zeitdauer alte Aufnahme:" << SekundenAlterJob)
 			if (SekundenAlterJob>0)
 			{
 				// Nur die Zeit anpassen
 				time_t curTime=time(NULL) ;
 				time_t startTime=getTime1(jobID) ;
 
-				FILE_LOG(logDEBUG) << "Zeiten curTime+Sekunden:" << curTime+Sekunden  ;
-				FILE_LOG(logDEBUG) << "Zeiten startTime+SekundenAlterJob:" << startTime+SekundenAlterJob  ;
+				LOG_DEBUG("Zeiten curTime+Sekunden:" << curTime+Sekunden)
+				LOG_DEBUG("Zeiten startTime+SekundenAlterJob:" << startTime+SekundenAlterJob)
 				if (curTime+Sekunden>startTime+SekundenAlterJob)
 				{
 					fname=getInfoText(jobID) ;
 					Sekunden=curTime+Sekunden-startTime ;
-					FILE_LOG(logINFO) << "Aufnahme wird auf " << Sekunden << "verlaengert " ;
+					LOG_INFO("Aufnahme wird auf " << Sekunden << "verlaengert ")
 					updateClient(jobID,getCustomValue(jobID),0,Sekunden,getInfoText(jobID),startTime) ;
 					addThreadMessage(jobID,std::string("104:" +convertIntToString(m_channelNum)+ ":2:") + convertStringToHex(fname)) ;
 				}
@@ -308,7 +309,7 @@ class MonitorAudioPlugInRecorder : public MonitorAudioPlugIn
 										strTime->tm_hour,
 										strTime->tm_min,
 										strTime->tm_sec) ;
-				FILE_LOG(logDEBUG) << zeitString  ;
+				LOG_DEBUG(zeitString)
 
 				if (m_paramCount<2)
 				{

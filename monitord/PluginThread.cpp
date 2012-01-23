@@ -13,7 +13,7 @@
 
 PluginThread::PluginThread() : ThreadBase(-1)
 {
-	FILE_LOG(logDEBUG) << "Erstellt PT:"  ;
+	LOG_DEBUG("Erstellt PT:")
 	m_iLockNum=-1 ;
 	m_plugin=NULL ;
 	m_bStop=false ;
@@ -27,11 +27,11 @@ bool PluginThread::initPlugin(int LOCKNUM, std::string dllfile,XMLNode *pConfig)
 	char dllname[255] ;
 	memset(dllname,0,255) ;
 	strncpy(dllname,dllfile.c_str(),255) ;
-	FILE_LOG(logDEBUG) << "DLL Name:" << dllname  ;
+	LOG_DEBUG("DLL Name:" << dllname)  
 
 	dll= new DLLFactory<MonitorPlugInFactory>(dllname);
 
-	FILE_LOG(logDEBUG) << "done" ;
+	LOG_DEBUG("done") 
 	//
 	// If it worked we should have dll.factory pointing
 	// to a subclass of PlugInFactory
@@ -76,7 +76,7 @@ void *PluginThread::Thread()
 	ModuleResultBase* pRes ;
 
 
-	FILE_LOG(logINFO) << "PluginThread starting"  ;
+	LOG_INFO("PluginThread starting")  
 	this->ThreadStarted() ; // Erstmal Bescheid geben, dass wir laufen
 	createLock() ;
 
@@ -87,7 +87,7 @@ void *PluginThread::Thread()
 		memLock(m_Lock) ;
 		while (m_queue.size()>0)
 		{
-			FILE_LOG(logDEBUG) << "plugin processing - size=" << m_queue.size()  ;
+			LOG_DEBUG("plugin processing - size=" << m_queue.size()) 
 			pRes=m_queue.back() ;
 			m_queue.pop_back() ;
 			memUnlock(m_Lock) ;
@@ -103,7 +103,7 @@ void *PluginThread::Thread()
 		memUnlock(m_Lock) ;
 
 	}
-	FILE_LOG(logINFO) << "PluginThread was stopped"  ;
+	LOG_INFO("PluginThread was stopped")  
 
 	m_plugin->quitProcessing();
 	return NULL;
@@ -129,7 +129,7 @@ void PluginThread::addResult(ModuleResultBase* pRes)
 	{
 		m_queue.insert(m_queue.begin(),localResult) ;
 	} else {
-		FILE_LOG(logERROR) << "max plugin queue size exceeded. moduleresult not queued"  ;
+		LOG_ERROR("max plugin queue size exceeded. moduleresult not queued") 
 	}
 
 	memUnlock(m_Lock) ;
@@ -146,8 +146,6 @@ MonitorPluginsManager& GetPluginsManager() { return (GlobalMonitorPluginsManager
 
 MonitorPluginsManager::MonitorPluginsManager()
 {
-	// FILE_LOG(logINFO) << "PluginManager erstellt"  ;
-
 	if ( memLockCreate( 12348, & m_MemLock) < 0) {
    		ThrowMonitorException("PluginManager: memLockCreate failed") ;
     }
@@ -175,15 +173,15 @@ bool MonitorPluginsManager::loadScriptFilter(std::string pluginFilterFileName)
 
 			if (lua_pcall(L, 0, 0, 0))
 			{
-				FILE_LOG(logERROR) << "LUA test fehlgeschlagen" << std::endl ;
+				LOG_ERROR("LUA test fehlgeschlagen" << std::endl) 
 			}
 
 			m_bUseLUAScript=true ;
-			FILE_LOG(logINFO) << "Successfully loaded LUA filter: " << pluginFilterFileName ;
+			LOG_INFO("Successfully loaded LUA filter: " << pluginFilterFileName) 
 		}
 		catch (const std::string &e)
 		{
-			FILE_LOG(logERROR) << "Error loading lua dispatcher script: "  << e;
+			LOG_ERROR("Error loading lua dispatcher script: "  << e)
 		}
 		return m_bUseLUAScript ;
 		#endif
@@ -270,19 +268,19 @@ bool MonitorPluginsManager::dispatchResult(ModuleResultBase *pRes)
 
 				      /* do the call (2 arguments, 1 result) */
 				      if (lua_pcall(L, 0, LUA_MULTRET, 0) != 0) {
-				      	FILE_LOG(logERROR) << "Fehler beim Aufruf lua dispatcher script:" << lua_tostring(L, -1);
+				      	LOG_ERROR("Fehler beim Aufruf lua dispatcher script:" << lua_tostring(L, -1))
 				        //error(L, "error running function `f': %s",
 				        //         lua_tostring(L, -1));
 					  }
 
 				      /* retrieve result */
 				      if (!lua_isnumber(L, -1)) {
-				      	FILE_LOG(logERROR) << "nicht-numerische Antwort vom lua dispatcher script" ;
+				      	LOG_ERROR("nicht-numerische Antwort vom lua dispatcher script") 
 				        //error(L, "function `f' must return a number");
 					  }
 				      z = lua_tonumber(L, -1);
 				      lua_pop(L, 1);  /* pop returned value */
-					  FILE_LOG(logDEBUG1) << "lua Result (global dispatcher)" << z ;
+					  LOG_DEBUG("lua Result (global dispatcher)" << z) 
 
 					  if (z==1) m_bSkipDispatching=true ;
 				}
@@ -301,14 +299,14 @@ bool MonitorPluginsManager::loadPlugin(std::string dllfile, XMLNode *pConfig, st
  	PluginThread* pt=new PluginThread() ;
  	if (pt->initPlugin(4000,dllfile,pConfig))
  	{
-		FILE_LOG(logDEBUG) << "startet plugin " << dllfile ;
+		LOG_DEBUG("startet plugin " << dllfile) 
 		pt->Start() ;
 		pt->setPluginName(pluginName) ;
 		addModule(pt) ;
 
 		return true ;
 	} else	{
-		FILE_LOG(logERROR) << "DLL Factory konnte nicht initialisiert werden !" ;
+		LOG_ERROR("DLL Factory konnte nicht initialisiert werden !") 
 		return false ;
 	}
 }
@@ -323,7 +321,7 @@ bool MonitorPluginsManager::loadPluginsFromConfigNode(XMLNode *pConfig)
 	XMLNode *pParameters ;
 	XMLNode pluginNode; // = pConfig->getChildNode("plugin",sndCard) ;
 
-	FILE_LOG(logINFO) << "reading plugin configuration" ;
+	LOG_INFO("reading plugin configuration") 
 	int nPlugins=pConfig->nChildNode("plugin");
 	for (int plugin=0;plugin<nPlugins;++plugin)
 	{
@@ -334,15 +332,15 @@ bool MonitorPluginsManager::loadPluginsFromConfigNode(XMLNode *pConfig)
 			pluginFile=getNodeText(pluginNode,"file","") ;
 			parameterNode=pluginNode.getChildNode("parameters");
 
-			FILE_LOG(logINFO) << "Plugin found: " << pluginName ;
-			FILE_LOG(logDEBUG) << "File:" << pluginFile ;
+			LOG_INFO("Plugin found: " << pluginName)
+			LOG_DEBUG("File:" << pluginFile)
 			if (parameterNode.isEmpty()==false)
 			{
-				FILE_LOG(logDEBUG) << "found parameters" ;
+				LOG_DEBUG("found parameters")
 				pParameters=&parameterNode ;
 			} else
 			{
-				FILE_LOG(logDEBUG) << "no parameters found"  ;
+				LOG_DEBUG("no parameters found")  
 				pParameters=NULL;
 			}
 

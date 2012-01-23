@@ -1,0 +1,13 @@
+*.o
+autom4te*
+config.*
+.deps
+.dirstamp
+ltmain.sh
+m4/
+Makefile
+libtool
+*.xml
+stamp-h1
+*.nsi
+monitord/monitord

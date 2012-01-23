@@ -69,7 +69,7 @@ void CSndPipe::ProcessBuffer(CAudioBuffer *buffer)
 				{
 					if (msg.pThread->IsRunning())
 					{
-						FILE_LOG(logDEBUG) << "L: Nachricht wird versendet ..."  ;
+						LOG_DEBUG("L: Nachricht wird versendet ...")  
 						msg.pThread->addOutputText(msg.message);
 					}
 				}
@@ -93,7 +93,7 @@ void CSndPipe::ProcessBuffer(CAudioBuffer *buffer)
 				{
 					if (msg.pThread->IsRunning())
 					{
-						FILE_LOG(logDEBUG) << "R: Nachricht wird versendet ..."  ;
+						LOG_DEBUG("R: Nachricht wird versendet ...") 
 						msg.pThread->addOutputText(msg.message);
 					}
 				}
@@ -149,11 +149,11 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 	{
 		if (pConfig->m_sndConfig[cardnum].iAktiv==1)
 		{
-			FILE_LOG(logINFO) << "creating decoders for soundcard #" << cardnum  ;
+			LOG_INFO("creating decoders for soundcard #" << cardnum) 
 			// FMS ?
 			if (pConfig->m_sndConfig[cardnum].iFMS[0]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "L:FMS" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "L:FMS") 
 				newModule= (MonitorModule*) new MonitorModuleFMS(sampleRate, &(pConfig->m_sndConfig[cardnum].configFMS[0])) ;
 				newModule->setChannelName(pConfig->m_sndConfig[cardnum].sChannelName0) ;
 				newModule->setServerName(pConfig->m_sMonitordName) ;
@@ -163,7 +163,7 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 
 			if (pConfig->m_sndConfig[cardnum].iFMS[1]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "R:FMS" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "R:FMS") 
 				newModule= (MonitorModule*) new MonitorModuleFMS(sampleRate,&(pConfig->m_sndConfig[cardnum].configFMS[1])) ;
 				newModule->setChannelName(pConfig->m_sndConfig[cardnum].sChannelName1) ;
 				newModule->setServerName(pConfig->m_sMonitordName) ;
@@ -175,7 +175,7 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 			// ZVEI
 			if (pConfig->m_sndConfig[cardnum].iZVEI[0]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "L:ZVEI" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "L:ZVEI") 
 				newModule= (MonitorModule*) new MonitorModuleZVEI(sampleRate,&(pConfig->m_sndConfig[cardnum].configZVEI[0])) ;
 				newModule->setChannelName(pConfig->m_sndConfig[cardnum].sChannelName0) ;
 				newModule->setServerName(pConfig->m_sMonitordName) ;
@@ -186,7 +186,7 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 
  			if (pConfig->m_sndConfig[cardnum].iZVEI[1]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "R:ZVEI" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "R:ZVEI") 
 				newModule= (MonitorModule*) new MonitorModuleZVEI(sampleRate,&(pConfig->m_sndConfig[cardnum].configZVEI[1])) ;
 				newModule->setChannelName(pConfig->m_sndConfig[cardnum].sChannelName1) ;
 				newModule->setServerName(pConfig->m_sMonitordName) ;
@@ -198,7 +198,7 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 			// POC512
 			if (pConfig->m_sndConfig[cardnum].iPOC512[0]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "L:POC512" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "L:POC512") 
 				//newModule= (MonitorModule*) new MonitorModulePocsag512(sampleRate,&(pConfig->m_sndConfig[cardnum].configPOC512[0])) ;
 				newModule= (MonitorModule*) new MonitorModulePocsag512(sampleRate,1,0) ;
 				//(sampleRate,1,0) ;
@@ -212,7 +212,7 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 
 			if (pConfig->m_sndConfig[cardnum].iPOC512[1]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "R:POC512" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "R:POC512") 
 				newModule= (MonitorModule*) new MonitorModulePocsag512(sampleRate,1,0) ;
 				//newModule= (MonitorModule*) new MonitorModulePocsag512(&(pConfig->m_sndConfig[cardnum].configPOC512[1])) ;
 				newModule->setChannelName(pConfig->m_sndConfig[cardnum].sChannelName1) ;
@@ -225,7 +225,7 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 			// POC1200
 			if (pConfig->m_sndConfig[cardnum].iPOC1200[0]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "L:POC1200" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "L:POC1200") 
 				newModule= (MonitorModule*) new MonitorModulePocsag1200(sampleRate,1,0) ;
 				newModule->setChannelName(pConfig->m_sndConfig[cardnum].sChannelName0) ;
 				newModule->setServerName(pConfig->m_sMonitordName) ;
@@ -236,7 +236,7 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 
 			if (pConfig->m_sndConfig[cardnum].iPOC1200[1]==1)
 			{
-				FILE_LOG(logINFO) << "creating decoder for soundcard #" << cardnum  << "R:POC1200" ;
+				LOG_INFO("creating decoder for soundcard #" << cardnum  << "R:POC1200")
 				newModule= (MonitorModule*) new MonitorModulePocsag1200(sampleRate,1,0) ;
 				newModule->setChannelName(pConfig->m_sndConfig[cardnum].sChannelName1) ;
 				newModule->setServerName(pConfig->m_sMonitordName) ;
@@ -245,12 +245,12 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 				m_ModulesRechts.insert(m_ModulesRechts.end(),newModule) ;
 			}
 		} else {
-			FILE_LOG(logINFO) << "skipping decoders for soundcard #" << cardnum  << " : card not active !" ;
+			LOG_INFO("skipping decoders for soundcard #" << cardnum  << " : card not active !") 
 		}
 
 	} catch (MonitorException e)
 	{
-		FILE_LOG(logERROR) << "Error initialising decoder modules for soundcard #" << cardnum << ":" << e.what()  ;
+		LOG_ERROR("Error initialising decoder modules for soundcard #" << cardnum << ":" << e.what())  
 		return false ;
 	}
 	return true ;
@@ -260,9 +260,9 @@ bool CSndPipe::initDecoderModules(int cardnum, MonitorConfiguration* pConfig)
 bool CSndPipe::loadPlugins(MonitorConfiguration* pConfig, XMLNode configLeft, XMLNode configRight)
 {
 
-	FILE_LOG(logINFO) << "loading audioplugins for left channel" ;
+	LOG_INFO("loading audioplugins for left channel") 
 	loadPlugins(pConfig, configLeft,m_pluginsLeft,2*m_cardNum+0) ;
-	FILE_LOG(logINFO) << "loading audioplugins for right channel"  ;
+	LOG_INFO("loading audioplugins for right channel")
 	loadPlugins(pConfig, configRight,m_pluginsRight,2*m_cardNum+1) ;
 
 	return true ;
@@ -280,7 +280,7 @@ bool CSndPipe::loadPlugins(MonitorConfiguration* pConfig, XMLNode config,Monitor
 		if (!((pluginNode=config.getChildNode("plugin",plugin))).isEmpty())
 		{
 			file=getNodeText(pluginNode,"file","") ;
-			FILE_LOG(logINFO) << "plugin file:" << plugin << "=" << file  ;
+			LOG_INFO("plugin file:" << plugin << "=" << file)
 			if (file.size()>0)
 			{
 				loadPlugin(pConfig, file,pluginNode,plugins,channelNum) ;
@@ -301,7 +301,7 @@ bool CSndPipe::loadPlugin(MonitorConfiguration* pConfig, std::string dllfile,XML
 
 	if ((i<=MAXPLUGINS) &&(plugins[i]==NULL))
 	{
-		FILE_LOG(logINFO) << "Plugin# " << i << ": loading audio plugin using: " << dllfile  ;
+		LOG_INFO("Plugin# " << i << ": loading audio plugin using: " << dllfile)
 		#ifdef WIN32
 			static DLLFactory<MonitorAudioPlugInFactory> dll( dllfile.c_str() );
 		#else
@@ -322,7 +322,7 @@ bool CSndPipe::loadPlugin(MonitorConfiguration* pConfig, std::string dllfile,XML
 				plugins[i]->InitAudioProcessing(pConfig, config, channelNum) ;
 			}
 		} else {
-			FILE_LOG(logERROR) << "Error plugin Factory from file " << dllfile  ;
+			LOG_ERROR("Error plugin Factory from file " << dllfile) 
 		}
 	}
 	return true ;

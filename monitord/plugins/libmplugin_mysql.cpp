@@ -64,7 +64,7 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 
 	virtual void Show()
 	{
-		FILE_LOG(logINFO) << "MonitorMySQLPlugin successfully loaded" ;
+		LOG_INFO("MonitorMySQLPlugin successfully loaded" )
 	}
 
 	std::string escape_string(std::string text)
@@ -79,7 +79,7 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 
 	virtual bool processResult(class ModuleResultBase *pRes)
 	{
-		FILE_LOG(logDEBUG) << "mysql: processing Result..."  ;
+		LOG_DEBUG("mysql: processing Result...")  
 
 		if (m_bConnected==false)
 		{
@@ -91,18 +91,18 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 		{
 			usleep(100) ;
 			pingcounter++ ;
-			FILE_LOG(logINFO) << "mysql connection lost ... trying reconnect"  ;
+			LOG_INFO("mysql connection lost ... trying reconnect"  )
 		}
 
 		if (mysql_ping(&m_mysql))
 		{
-			FILE_LOG(logERROR) << " unable to reconnect to mysql database" ;
+			LOG_ERROR(" unable to reconnect to mysql database" )
 			return false ;
 		}
 
 		if (pingcounter>0)
 		{
-			FILE_LOG(logINFO) << "mysql: connection re-established"  ;
+			LOG_INFO("mysql: connection re-established"  )
 		}
 
 		// wenn wir latin1 einfuegen sollten wir das mysql auch mitteilen!
@@ -158,7 +158,7 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 
 		}
 		FILELog::ReportingLevel() = FILELog::FromString(logLevel);
-		FILE_LOG(logINFO) << "logging started";
+		LOG_INFO("logging started")
 		#endif
 
 		if (ssl == 1 && ssl_cacert != "0" && ssl_cert != "0" && ssl_key != "0")
@@ -169,7 +169,7 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 				ssl_cacert.c_str(),
 				NULL,
 				NULL);
-			FILE_LOG(logINFO) << "mySQL ssl support configured with key=" << ssl_key << " and cert=" << ssl_cert << " and cacert=" << ssl_cacert;
+			LOG_INFO("mySQL ssl support configured with key=" << ssl_key << " and cert=" << ssl_cert << " and cacert=" << ssl_cacert)
 		}
 
 		// Parameter parsen
@@ -184,11 +184,11 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 								0			// Options
 								) ==NULL)
 		{
-			FILE_LOG(logERROR) << "Could not connect to database \"" << database << "\" on host " << hostname << " with username=\"" << username << "\""  ;
+			LOG_ERROR("Could not connect to database \"" << database << "\" on host " << hostname << " with username=\"" << username << "\""  )
 			m_bConnected=false ;
 		} else
 		{
-			FILE_LOG(logINFO) << "successfully connected to mysql database " << database << " on host " << hostname << " with username=\"" << username << "\""  ;
+			LOG_INFO("successfully connected to mysql database " << database << " on host " << hostname << " with username=\"" << username << "\""  )
 			m_bConnected=true ;
 		}
 		return m_bConnected ;
@@ -228,8 +228,8 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 		std::string table=getNodeText(config,"table","status") ;
 		std::string name, source, value ;
 
-		FILE_LOG(logDEBUG) << " reading mapping info " ;
-		FILE_LOG(logDEBUG) << "table="<< table  ;
+		LOG_DEBUG("reading mapping info")
+		LOG_DEBUG("table=" << table)
 
 		dbTable=table;
 		FieldInfo *pFieldInfo ;
@@ -247,7 +247,7 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 				if (name.empty()) ThrowMonitorException("MySQL Konfiguration: Kein Feldname vergeben ! ") ;
 				if (value.empty()) ThrowMonitorException("MySQL Konfiguration: Kein Feldwert vergeben ! ") ;
 
-				FILE_LOG(logDEBUG) << "Feld: " << name << " / " << source << ":" << value  ;
+				LOG_DEBUG("Feld: " << name << " / " << source << ":" << value)  
 				pFieldInfo=new FieldInfo ;
 				pFieldInfo->value=value ;
 				if (source=="mysql")
@@ -276,7 +276,7 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 				fieldName= i->first ;
 				pFieldInfo= i->second ;
 
-				FILE_LOG(logDEBUG) << "field:" << fieldName << " | value=" << pFieldInfo->value  ;
+				LOG_DEBUG("field:" << fieldName << " | value=" << pFieldInfo->value) 
 				if (i!=mapping.begin())
 				{
 					insertString+="," ;
@@ -295,7 +295,7 @@ class MonitorPlugInMySQL : public MonitorPlugIn
 			insertString+=") values (" ;
 			insertString+=valueString + ")" ;
 
-			FILE_LOG(logDEBUG) << "Insertstring:" << insertString ;
+			LOG_DEBUG("Insertstring:" << insertString) 
 			return insertString ;
 	}
 

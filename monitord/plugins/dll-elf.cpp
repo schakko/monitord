@@ -12,7 +12,7 @@ DLLManager::DLLManager( const char *fname )
 	h=dlopen( fname, RTLD_NOW );
 	if (h==NULL)
 	{
-		FILE_LOG(logERROR) << "error loading library file \"" << fname << "\"" ;
+		LOG_ERROR("error loading library file \"" << fname << "\"" )
 	}
 	err=dlerror();
 }

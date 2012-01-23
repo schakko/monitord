@@ -117,12 +117,12 @@ void SocketThreadMonitord::processInput()
 		int cmd ;
 
 		try {
-			FILE_LOG(logDEBUG) << "command from client: " << m_cmdString  ;
+		LOG_DEBUG("command from client: " << m_cmdString)
 			cmd = convertToInt(m_cmdString) ;
 		}
 		catch (std::runtime_error err)
 		{
-			FILE_LOG(logERROR) << "Fehler bei der Cmd Konvertierung: " << m_cmdString  ;
+			LOG_ERROR("Fehler bei der Cmd Konvertierung: " << m_cmdString) 
 			cmd=-1 ;
 			say(illegalFormatString) ;
 		}
@@ -270,7 +270,7 @@ void SocketThreadMonitord::startRecording(int seconds, int channel)
 	int sndCardNum =channel / 2 ;
 	int sndCardLeftRight=channel % 2 ;
 
-	FILE_LOG(logDEBUG) << "Starte Aufnahme mit" << seconds << " Sekunden" << " auf Karte " << sndCardNum << ", Kanal=" << sndCardLeftRight << endl ;
+	LOG_DEBUG( "Starte Aufnahme mit" << seconds << " Sekunden" << " auf Karte " << sndCardNum << ", Kanal=" << sndCardLeftRight << endl)
 	std::string command=std::string("RECORD:" + convertIntToString(seconds)+ ":") + convertIntToString(channel) ;
 #if 0 /* FIXME muß noch umstrukturiert werden */
 	std::string resultString =m_monitor.m_sndIn[sndCardNum].PluginCommand(sndCardLeftRight,command,this);
@@ -317,18 +317,18 @@ void SocketThreadMonitord::checkLogin()
 				{
 					m_authenticated=true ;
 					m_loginname=loginname ;
-					FILE_LOG(logINFO) << "login accepted (user allowed): " << m_loginname << " from ip " << m_sClientIP ;
+					LOG_INFO("login accepted (user allowed): " << m_loginname << " from ip " << m_sClientIP)
 					say ("100\r\n") ; // Login OK
 				} else {
 					say ("101:003\r\n") ; // Benutzername falsch
-					FILE_LOG(logINFO) <<"login denied: " << m_loginname << " from ip " << m_sClientIP ;
+				 	LOG_INFO("login denied: " << m_loginname << " from ip " << m_sClientIP)
 				}
 			} else {
 				say ("101:008\r\n") ; // Falsche Protokollversion
-				FILE_LOG(logINFO) <<"login denied, incorrect protocol version: " << protocol << " from ip: " << m_sClientIP << " with username: " << loginname ;
+				LOG_INFO("login denied, incorrect protocol version: " << protocol << " from ip: " << m_sClientIP << " with username: " << loginname)
 			}
 		} else {
-			FILE_LOG(logINFO) << "login with too few arguments detected" ;
+			LOG_INFO("login with too few arguments detected")
 			say ("101:004;TOO FEW ARGUMENTS\r\n") ; // Fehler: Anfrage nicht verstanden !
 		}
 	}

@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <cstdio>
 #include "convert.h"
-
+#include "config.h"
 
 inline std::string NowTime();
 
@@ -133,10 +133,27 @@ class FILELOG_DECLSPEC FILELog : public Log<Output2FILE> {};
 #define FILELOG_MAX_LEVEL logDEBUG4
 #endif
 
+#ifdef HAVE_LOG4CXX
+#include "log4cxx/logger.h"
+#include "log4cxx/basicconfigurator.h"
+#include "log4cxx/propertyconfigurator.h"
+#include "log4cxx/helpers/exception.h"
+
+#define LOG_INSTANCE log4cxx::Logger::getLogger("monitord")
+#define LOG_INFO(stream) LOG4CXX_INFO(LOG_INSTANCE, stream)
+#define LOG_WARNING(stream) LOG4CXX_WARN(LOG_INSTANCE, stream)
+#define LOG_DEBUG(stream) LOG4CXX_DEBUG(LOG_INSTANCE, stream)
+#define LOG_ERROR(stream) LOG4CXX_ERROR(LOG_INSTANCE, stream)
+#else // LOG4CXX
 #define FILE_LOG(level) \
-    if (level > FILELOG_MAX_LEVEL) ;\
-    else if (level > FILELog::ReportingLevel() || !Output2FILE::Stream()) ; \
-    else FILELog().Get(level) <<  std::string(__FILE__) << "(" << convertIntToString(__LINE__) << ") "
+	if (level > FILELOG_MAX_LEVEL) ;\
+	else if (level > FILELog::ReportingLevel() || !Output2FILE::Stream()) ; \
+	else FILELog().Get(level) << std::string(__FILE__) << "(" << convertIntToString(__LINE__) << ") "
+#define LOG_INFO(stream) FILE_LOG(logINFO) << stream;
+#define LOG_WARNING(stream) FILE_LOG(logWARN) << stream;
+#define LOG_DEBUG(stream) FILE_LOG(logDEBUG) << stream;
+#define LOG_ERROR(stream) FILE_LOG(logERROR) << stream;
+#endif // !LOG4CX
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
 
