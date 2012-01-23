@@ -151,6 +151,33 @@ monitord_plugins_libmplugin_mysql_la_LIBS=\
 endif # mysql Support ?
 
 # --------------------------------------------------------
+# Monitor-Plugin: ActiveMQ
+#
+if ACTIVEMQ
+pkglib_LTLIBRARIES+= \
+	monitord/plugins/libmplugin_activemq.la
+
+monitord_plugins_libmplugin_activemq_la_SOURCES=\
+	${monitord_plugins_common} \
+	monitord/plugins/mplugin.cpp \
+	monitord/plugins/libmplugin_activemq.cpp
+
+monitord_plugins_libmplugin_activemq_la_CPPFLAGS =\
+	${monitord_monitord_CPPFLAGS} \
+	${ACTIVEMQ_CFLAGS} \
+	${DLL}
+
+monitord_plugins_libmplugin_activemq_la_LDFLAGS=\
+	-no-undefined \
+	${LIBACTIVEMQ} \
+	${DLL}
+
+monitord_plugin_libmplugin_activemq_la_LIBS=\
+	${ACTIVEMQ_LIBS}
+
+endif
+
+# --------------------------------------------------------
 # Audio-Plugin: Recorder
 #
 monitord_plugins_libmplugin_audiorecorder_la_SOURCES=\
