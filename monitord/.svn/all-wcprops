@@ -1,0 +1,299 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/!svn/ver/454/monitor/trunk/monitord
+END
+MonitorModulePocsag.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/435/monitor/trunk/monitord/MonitorModulePocsag.h
+END
+regexp.h
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/323/monitor/trunk/monitord/regexp.h
+END
+MonitorModuleZVEI.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/430/monitor/trunk/monitord/MonitorModuleZVEI.h
+END
+SocketThreadFMS32.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/418/monitor/trunk/monitord/SocketThreadFMS32.h
+END
+doxygen.config
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/323/monitor/trunk/monitord/doxygen.config
+END
+SocketThreadMonitord.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/418/monitor/trunk/monitord/SocketThreadMonitord.h
+END
+MonitorModulesResults.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/418/monitor/trunk/monitord/MonitorModulesResults.cpp
+END
+MonitorModuleFMS.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/446/monitor/trunk/monitord/MonitorModuleFMS.cpp
+END
+SndPipe.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/420/monitor/trunk/monitord/SndPipe.h
+END
+costab.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/323/monitor/trunk/monitord/costab.cpp
+END
+MonitorSignals.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/323/monitor/trunk/monitord/MonitorSignals.h
+END
+MonitorAudio.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/323/monitor/trunk/monitord/MonitorAudio.h
+END
+SocketThreadCrusader.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/418/monitor/trunk/monitord/SocketThreadCrusader.h
+END
+xmltools.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/323/monitor/trunk/monitord/xmltools.cpp
+END
+MonitorConfiguration.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/363/monitor/trunk/monitord/MonitorConfiguration.h
+END
+base64.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/323/monitor/trunk/monitord/base64.cpp
+END
+SocketServer.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/418/monitor/trunk/monitord/SocketServer.h
+END
+MonitorModules.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/323/monitor/trunk/monitord/MonitorModules.h
+END
+PluginThread.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/450/monitor/trunk/monitord/PluginThread.cpp
+END
+lua.hpp
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/357/monitor/trunk/monitord/lua.hpp
+END
+MonitorModulePocsag512.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/361/monitor/trunk/monitord/MonitorModulePocsag512.h
+END
+memlock.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/323/monitor/trunk/monitord/memlock.cpp
+END
+MonitorModulePocsag.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/418/monitor/trunk/monitord/MonitorModulePocsag.cpp
+END
+regexp.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/323/monitor/trunk/monitord/regexp.cpp
+END
+MonitorModuleZVEI.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/433/monitor/trunk/monitord/MonitorModuleZVEI.cpp
+END
+SocketThreadFMS32.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/418/monitor/trunk/monitord/SocketThreadFMS32.cpp
+END
+Monitor.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/418/monitor/trunk/monitord/Monitor.h
+END
+SocketThreadMonitord.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/445/monitor/trunk/monitord/SocketThreadMonitord.cpp
+END
+MonitorExceptions.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/321/monitor/trunk/monitord/MonitorExceptions.h
+END
+MonitorModulePocsag1200.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/323/monitor/trunk/monitord/MonitorModulePocsag1200.h
+END
+SndPipe.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/447/monitor/trunk/monitord/SndPipe.cpp
+END
+MonitorLogging.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/419/monitor/trunk/monitord/MonitorLogging.h
+END
+MonitorModulesResults.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/418/monitor/trunk/monitord/MonitorModulesResults.h
+END
+MonitorSignals.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/433/monitor/trunk/monitord/MonitorSignals.cpp
+END
+MonitorModuleFMS.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/357/monitor/trunk/monitord/MonitorModuleFMS.h
+END
+SocketThreadCrusader.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/418/monitor/trunk/monitord/SocketThreadCrusader.cpp
+END
+MonitorAudio.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/323/monitor/trunk/monitord/MonitorAudio.cpp
+END
+SocketServer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/452/monitor/trunk/monitord/SocketServer.cpp
+END
+MonitorConfiguration.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/447/monitor/trunk/monitord/MonitorConfiguration.cpp
+END
+MonitorModules.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/323/monitor/trunk/monitord/MonitorModules.cpp
+END
+MonitorModulePocsag512.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/363/monitor/trunk/monitord/MonitorModulePocsag512.cpp
+END
+convert.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/327/monitor/trunk/monitord/convert.h
+END
+xmltools.h
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/323/monitor/trunk/monitord/xmltools.h
+END
+Monitor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/449/monitor/trunk/monitord/Monitor.cpp
+END
+base64.h
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/323/monitor/trunk/monitord/base64.h
+END
+ReadMe.txt
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/321/monitor/trunk/monitord/ReadMe.txt
+END
+PluginThread.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/363/monitor/trunk/monitord/PluginThread.h
+END
+memlock.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/323/monitor/trunk/monitord/memlock.h
+END
+MonitorModulePocsag1200.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/435/monitor/trunk/monitord/MonitorModulePocsag1200.cpp
+END

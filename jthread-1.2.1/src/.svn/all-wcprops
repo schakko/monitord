@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/329/monitor/trunk/jthread-1.2.1/src
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/329/monitor/trunk/jthread-1.2.1/src/Makefile.in
+END
+jmutex.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/321/monitor/trunk/jthread-1.2.1/src/jmutex.h
+END
+jmutexautolock.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/321/monitor/trunk/jthread-1.2.1/src/jmutexautolock.h
+END
+jthread.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/321/monitor/trunk/jthread-1.2.1/src/jthread.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/173/monitor/trunk/jthread-1.2.1/src/Makefile.am
+END

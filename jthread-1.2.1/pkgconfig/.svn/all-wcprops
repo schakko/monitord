@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/329/monitor/trunk/jthread-1.2.1/pkgconfig
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/329/monitor/trunk/jthread-1.2.1/pkgconfig/Makefile.in
+END
+jthread-uninstalled.pc.in
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/!svn/ver/329/monitor/trunk/jthread-1.2.1/pkgconfig/jthread-uninstalled.pc.in
+END
+jthread.pc.in
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/329/monitor/trunk/jthread-1.2.1/pkgconfig/jthread.pc.in
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/173/monitor/trunk/jthread-1.2.1/pkgconfig/Makefile.am
+END

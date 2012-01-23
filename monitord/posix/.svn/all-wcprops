@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/!svn/ver/323/monitor/trunk/monitord/posix
+END
+MonitorAudioOSS.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/265/monitor/trunk/monitord/posix/MonitorAudioOSS.cpp
+END
+MonitorAudioALSA.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/321/monitor/trunk/monitord/posix/MonitorAudioALSA.h
+END
+MonitorAudioOSS.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/321/monitor/trunk/monitord/posix/MonitorAudioOSS.h
+END
+MonitorAudioALSA.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/323/monitor/trunk/monitord/posix/MonitorAudioALSA.cpp
+END

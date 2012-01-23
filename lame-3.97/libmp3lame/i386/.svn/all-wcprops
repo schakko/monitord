@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/328/monitor/trunk/lame-3.97/libmp3lame/i386
+END
+fft.nas
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/fft.nas
+END
+ffttbl.nas
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/ffttbl.nas
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/328/monitor/trunk/lame-3.97/libmp3lame/i386/Makefile.in
+END
+fft3dn.nas
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/fft3dn.nas
+END
+nasm.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/321/monitor/trunk/lame-3.97/libmp3lame/i386/nasm.h
+END
+cpu_feat.nas
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/cpu_feat.nas
+END
+choose_table.nas
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/choose_table.nas
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/Makefile.am
+END
+fftfpu.nas
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/fftfpu.nas
+END
+fftsse.nas
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/238/monitor/trunk/lame-3.97/libmp3lame/i386/fftsse.nas
+END

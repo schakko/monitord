@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/!svn/ver/386/monitor/trunk/win32-nsis
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/321/monitor/trunk/win32-nsis/license.txt
+END
+_start.bat
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/321/monitor/trunk/win32-nsis/_start.bat
+END
+monitord.nsi
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/330/monitor/trunk/win32-nsis/monitord.nsi
+END
+monitor.nsi.in
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/333/monitor/trunk/win32-nsis/monitor.nsi.in
+END
+_install-service.bat
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/321/monitor/trunk/win32-nsis/_install-service.bat
+END
+_stop.bat
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/321/monitor/trunk/win32-nsis/_stop.bat
+END
+_uninstall-service.bat
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/321/monitor/trunk/win32-nsis/_uninstall-service.bat
+END

@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/328/monitor/trunk/lame-3.97/ACM/tinyxml
+END
+Makefile.tinyxml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/Makefile.tinyxml
+END
+makedistlinux
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/makedistlinux
+END
+xmltest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/xmltest.cpp
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/328/monitor/trunk/lame-3.97/ACM/tinyxml/Makefile.in
+END
+makedistwin.bat
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/321/monitor/trunk/lame-3.97/ACM/tinyxml/makedistwin.bat
+END
+tinyxml_vc7.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/tinyxml_vc7.vcproj
+END
+tinyxml.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/tinyxml.cpp
+END
+changes.txt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/321/monitor/trunk/lame-3.97/ACM/tinyxml/changes.txt
+END
+tinyxml.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/tinyxml.dsp
+END
+tinyxml.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/321/monitor/trunk/lame-3.97/ACM/tinyxml/tinyxml.h
+END
+dox
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/dox
+END
+tinyxmlerror.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/tinyxmlerror.cpp
+END
+tinyxmlparser.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/tinyxmlparser.cpp
+END
+test.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/test.dsp
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/Makefile.am
+END
+test.dsw
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/238/monitor/trunk/lame-3.97/ACM/tinyxml/test.dsw
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/321/monitor/trunk/lame-3.97/ACM/tinyxml/readme.txt
+END

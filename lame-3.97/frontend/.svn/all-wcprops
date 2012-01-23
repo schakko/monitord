@@ -1,0 +1,197 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/328/monitor/trunk/lame-3.97/frontend
+END
+portableio.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/portableio.c
+END
+brhist.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/brhist.h
+END
+get_audio.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/get_audio.c
+END
+lame_vc6.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/lame_vc6.dsp
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/328/monitor/trunk/lame-3.97/frontend/Makefile.in
+END
+console.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/console.c
+END
+portableio.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/portableio.h
+END
+get_audio.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/get_audio.h
+END
+depcomp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/depcomp
+END
+console.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/console.h
+END
+mp3x_vc6.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/mp3x_vc6.dsp
+END
+lame_vc7.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/lame_vc7.vcproj
+END
+mp3x.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/mp3x.c
+END
+lametime.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/lametime.c
+END
+lametime.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/lametime.h
+END
+gpkplotting.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/gpkplotting.c
+END
+timestatus.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/timestatus.c
+END
+rtp.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/rtp.c
+END
+timestatus.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/timestatus.h
+END
+gpkplotting.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/gpkplotting.h
+END
+rtp.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/rtp.h
+END
+parse.c
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/parse.c
+END
+parse.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/parse.h
+END
+gtkanal.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/gtkanal.c
+END
+main.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/main.c
+END
+mp3rtp.c
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/mp3rtp.c
+END
+gtkanal.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/gtkanal.h
+END
+mp3x_vc7.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/mp3x_vc7.vcproj
+END
+amiga_mpega.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/amiga_mpega.c
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/Makefile.am
+END
+main.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/321/monitor/trunk/lame-3.97/frontend/main.h
+END
+brhist.c
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/238/monitor/trunk/lame-3.97/frontend/brhist.c
+END

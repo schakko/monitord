@@ -1,0 +1,12 @@
+# the standard variables don't make sense for an uninstalled copy
+prefix=
+exec_prefix=
+libdir=${pcfiledir}/..
+includedir=${pcfiledir}/..
+
+Name: Jthread Uninstalled
+Description: Multi-platform thread/mutex library, Not Installed
+Version: @VERSION@
+Requires:
+Libs: ${libdir}/src/libjthread.la
+Cflags: -I${includedir} -I${includedir}/src

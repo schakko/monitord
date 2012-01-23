@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/!svn/ver/321/monitor/trunk/simpleopt
+END
+SimpleGlob.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/321/monitor/trunk/simpleopt/SimpleGlob.h
+END
+fullSample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/173/monitor/trunk/simpleopt/fullSample.cpp
+END
+basicSample.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/173/monitor/trunk/simpleopt/basicSample.vcproj
+END
+globSample.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/173/monitor/trunk/simpleopt/globSample.vcproj
+END
+runtests.cmd
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/321/monitor/trunk/simpleopt/runtests.cmd
+END
+fullSample.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/173/monitor/trunk/simpleopt/fullSample.dsp
+END
+simpleopt.doxy
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/173/monitor/trunk/simpleopt/simpleopt.doxy
+END
+SimpleOpt.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/321/monitor/trunk/simpleopt/SimpleOpt.h
+END
+basicSample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/173/monitor/trunk/simpleopt/basicSample.cpp
+END
+runtests.txt
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/321/monitor/trunk/simpleopt/runtests.txt
+END
+globSample.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/173/monitor/trunk/simpleopt/globSample.cpp
+END
+fullSample.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/173/monitor/trunk/simpleopt/fullSample.vcproj
+END
+SimpleOpt.sln
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/173/monitor/trunk/simpleopt/SimpleOpt.sln
+END
+basicSample.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/173/monitor/trunk/simpleopt/basicSample.dsp
+END
+SimpleOpt.dsw
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/173/monitor/trunk/simpleopt/SimpleOpt.dsw
+END
+globSample.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/173/monitor/trunk/simpleopt/globSample.dsp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/173/monitor/trunk/simpleopt/Makefile
+END

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/224/monitor/trunk/jthread-1.2.1/src/win32
+END
+jthread.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/173/monitor/trunk/jthread-1.2.1/src/win32/jthread.cpp
+END
+jmutex.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/173/monitor/trunk/jthread-1.2.1/src/win32/jmutex.cpp
+END

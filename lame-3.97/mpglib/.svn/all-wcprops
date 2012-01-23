@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/328/monitor/trunk/lame-3.97/mpglib
+END
+layer2.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/layer2.c
+END
+layer3.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/layer3.c
+END
+tabinit.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/tabinit.h
+END
+interface.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/interface.c
+END
+decode_i386.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/decode_i386.h
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/328/monitor/trunk/lame-3.97/mpglib/Makefile.in
+END
+dct64_i386.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/dct64_i386.h
+END
+layer1.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/layer1.h
+END
+layer2.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/layer2.h
+END
+layer3.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/layer3.h
+END
+interface.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/interface.h
+END
+depcomp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/depcomp
+END
+mpglib_vc7.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/mpglib_vc7.vcproj
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/README
+END
+l2tables.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/l2tables.h
+END
+mpg123.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/mpg123.h
+END
+mpglib.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/mpglib.h
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/TODO
+END
+common.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/common.c
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/Makefile.am
+END
+huffman.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/huffman.h
+END
+tabinit.c
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/tabinit.c
+END
+decode_i386.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/decode_i386.c
+END
+mpglib_vc6.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/mpglib_vc6.dsp
+END
+layer1.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/layer1.c
+END
+dct64_i386.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/238/monitor/trunk/lame-3.97/mpglib/dct64_i386.c
+END
+common.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/321/monitor/trunk/lame-3.97/mpglib/common.h
+END

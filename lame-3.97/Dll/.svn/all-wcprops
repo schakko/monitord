@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/!svn/ver/328/monitor/trunk/lame-3.97/Dll
+END
+BladeMP3EncDLL.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/321/monitor/trunk/lame-3.97/Dll/BladeMP3EncDLL.h
+END
+LameDLLInterface.htm
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/321/monitor/trunk/lame-3.97/Dll/LameDLLInterface.htm
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/328/monitor/trunk/lame-3.97/Dll/Makefile.in
+END
+Makefile.mingw32
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/Makefile.mingw32
+END
+MP3export.pas
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/MP3export.pas
+END
+Example_vc6.dsw
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/Example_vc6.dsw
+END
+BladeMP3EncDLL.def
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/BladeMP3EncDLL.def
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/Makefile.am
+END
+BladeMP3EncDLL.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/BladeMP3EncDLL.c
+END
+LameDll_vc7.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/LameDll_vc7.vcproj
+END
+Example.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/Example.cpp
+END
+LameDll_vc6.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/LameDll_vc6.dsp
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/321/monitor/trunk/lame-3.97/Dll/README
+END
+Example_vc6.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/238/monitor/trunk/lame-3.97/Dll/Example_vc6.dsp
+END

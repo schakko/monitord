@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/328/monitor/trunk/lame-3.97/debian
+END
+lame.files
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/lame.files
+END
+control
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/control
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/328/monitor/trunk/lame-3.97/debian/Makefile.in
+END
+libmp3lame0-dev.files
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/libmp3lame0-dev.files
+END
+lame.docs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/lame.docs
+END
+libmp3lame0.files
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/libmp3lame0.files
+END
+changelog
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/changelog
+END
+copyright
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/copyright
+END
+libmp3lame0-dev.docs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/libmp3lame0-dev.docs
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/Makefile.am
+END
+rules
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/238/monitor/trunk/lame-3.97/debian/rules
+END

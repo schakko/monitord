@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<monitordconfig version="1.0">
+<name> Monitord </name>
+<logfile> monitord.log </logfile> <!-- screen = Bildschirm -->
+<loglevel> INFO </loglevel>
+<SocketFilterScript> socketfilter.lua </SocketFilterScript>
+<PluginFilterScript> pluginfilter.lua </PluginFilterScript>
+<auth>
+	<login>
+		<name>test</name>
+		<password>test</password>
+	</login>
+	<login>
+		<name>crusader</name>
+		<password>pw</password>
+	</login>
+
+	<!-- Bisher nur IP Adressen. Keine Netze oder Bereiche ! -->
+	<!-- Mehrfachnennungen sind aber moeglich, sofern sie Sinn machen -->
+	<!-- Suchreihenfolge: allow, login, deny -->	
+	<ip action="allow">192.168.0.1</ip> <!-- Diese IPs muessen sich nicht einloggen -->
+	<ip action="allow">192.168.0.2</ip> <!-- Diese IPs muessen sich nicht einloggen -->
+	<ip action="allow">192.168.0.3</ip> <!-- Diese IPs muessen sich nicht einloggen -->
+	<ip action="allow">127.0.0.1</ip> <!-- Diese IPs muessen sich nicht einloggen -->
+	<ip action="login"> any </ip> <!-- Diese IPs muessen sich einloggen -->
+	<ip action="deny">any</ip> <!-- Diese IPs koennen sich nicht einloggen -->
+</auth>
+
+<!--  -->
+<tcpsocket>
+	<bind> * </bind>
+	<port mode="monitord"> 9333 </port>
+	<port mode="fms32pro"> 9300 </port>
+	<port mode="crusader"> 7778 </port>
+</tcpsocket>
+
+<soundcard num=0>
+  <device>/dev/dsp0</device> <!-- das /dev/dsp0 meint die erste Soundkarte  -->
+  <status>1</status> <!-- 1=aktiv, 0=deaktivert -->
+  <baud>22050</baud>
+  <name> Erste Sondkarte </name>
+  <!-- Linker Kanal -->
+  <channel part="left">
+
+  <!-- Audio Plugin -->
+    <plugin name="audiorecorder"> 
+      <file> plugins/libmplugin_audiorecorder-0.dll </file>
+         <parameters>
+         <logfile> audio.log </logfile>
+		 <loglevel> INFO </loglevel>
+         <path>     rec/
+            </path> <!--- Ein existierender (!) Ordner MIT Schraegstrich am Ende -->
+      </parameters>
+    </plugin>
+  <!-- Audio Plugin -->
+	<name>Kanal 1</name>
+	<module type="fms">
+			<syncbits> 12 </syncbits>
+			<crc-check> 1 </crc-check>
+			<algorithmus> 1 </algorithmus>
+			<maxerrors> 3 </maxerrors>
+	</module>
+	<module type="poc512">
+		<crc-check> 1 </crc-check>
+		<ecc> 0 </ecc>
+	</module>
+	<module type="poc1200">
+		<crc-check> 1 </crc-check>
+		<ecc> 0 </ecc>
+		<algorithm> 1 </algorithm>
+		<maxerrors> 3 </maxerrors>
+	</module>
+	<module type="zvei">
+	</module>
+  </channel>
+  
+  <!-- Rechter Kanal -->
+  <channel part="right">
+	<name>Kanal 2</name>
+	<module type="zvei">
+	</module>
+  </channel>
+</soundcard>
+<soundcard num="1">
+  <device>/dev/dsp1</device>
+  <status>0</status> <!-- 1=aktiv, 0=deaktivert -->
+  <baud>22050</baud>
+  <name> Zweite Sondkarte </name>
+  <!-- Linker Kanal -->
+  <channel part="left">
+  <name>Kanal 1</name>
+  <module type="fms">
+	<syncbits> 8 </syncbits>
+	<crc-check> 1 </crc-check>
+  </module>
+  <module type="poc512">
+	<crc-check> 1 </crc-check>
+	<ecc> 0 </ecc>
+  </module>
+  <module type="zvei">
+  </module>
+  </channel>
+  
+  <!-- Rechter Kanal -->
+  <channel part="right">
+  </channel>
+</soundcard>
+
+<dataplugins>
+ <!-- Daten Plugin -->
+ <plugin name="mysql">
+	<file> plugins/libmplugin_mysql-0.dll</file>
+  	<parameters>
+  		<logfile> mysql.log </logfile>
+		<loglevel> DEBUG </loglevel>
+		<hostname> localhost</hostname>
+		<port> 3306 </port>
+		<username> monitord </username>
+		<password> monitord </password>
+		<database> monitord </database>
+		
+		<ssl>0</ssl> <!-- 0: ssl disabled - 1: ssl enabled -->
+		<ssl-cacert>/etc/mysql/ssl/ca-cert.pem</ssl-cacert>
+		<ssl-cert>/etc/mysql/ssl/client-cert.pem</ssl-cert>
+		<ssl-key>/etc/mysql/ssl/client-key.pem</ssl-key>
+
+		<!---- 
+		Attribut name=XYZ": Zielfeld in der mySQL Tabelle
+		Attribut source="mysql": Inhalt nicht aus dem Resultset nehmen, 
+		sondern "AS IS", also im Klartext als Parameter einfuegen (default="result")
+		Wert des Tags: Feldname im Resultset oder Klartext(je nach Attribut source)
+		Beispiele:
+		<field name="Uhrzeit" 		source="mysql"	> NOW() </field>
+			(laesst MySQL die aktuelle Uhr Zeit in das Feld "Uhrzeit" einfuegen)
+		<field name="Typ" 			source="mysql"	> "T" </field>
+			(fuegt ein "T" in das Feld "Typ" ein)
+		<field name="Meldung"> text </field>
+			(fuegt das Element "text" aus dem Resultset in das Feld "Meldung" ein)
+		--->
+
+		<mapping typ="fms"> 
+			<table> monitord_fms </table>
+			<field name="uhrzeit" source="mysql"> now() </field>
+			<field name="status"> statusdezimal </field>
+			<field name="kennung"> fmskennung </field>
+			<field name="richtung"> richtung </field>
+			<field name="text"> textuebertragung </field>
+			<field name="tki"> tki </field>
+			<field name="quelle"> channelnum </field>
+		</mapping>
+
+		<mapping typ="pocsag"> 
+			<table> monitord_pocsag </table>
+			<field name="uhrzeit" source="mysql"> now() </field>
+			<field name="kennung"> ric </field>
+			<field name="sub"> sub </field>
+			<field name="text"> text </field>
+			<field name="quelle"> channelnum </field>
+		</mapping>
+		
+		<mapping typ="zvei"> 
+			<table> monitord_zvei </table>
+			<field name="uhrzeit" source="mysql"> now() </field>
+			<field name="typ"> weckton </field>
+			<field name="kennung"> zvei </field>
+			<field name="text"> text </field>
+			<field name="quelle"> channelnum </field>
+		</mapping>
+	</parameters>
+
+ </plugin>
+</dataplugins>
+
+</monitordconfig>
