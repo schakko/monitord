@@ -8,7 +8,7 @@ Just push back this directory into /monitord/trunk.
 
 ## Compiling on CentOS 6.2
 
-	yum install autoconf automake pkg-config alsa-lib-devel lua-devel
+	yum install autoconf automake libtool pkg-config alsa-lib-devel lua-devel
 	aclocal -Im4
 	./configure --enable-plugins --with-activemq
 
