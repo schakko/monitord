@@ -10,6 +10,7 @@ Ich bin weder Leiter des Projekts noch Ansprechpartner für irgendwelche Protoko
 
 ## Kompilierung
 ### Cent OS 6.2
+
 	yum install autoconf automake libtool pkg-config alsa-lib-devel lua-devel
 	aclocal -Im4
 	./configure && make && make install
@@ -21,6 +22,7 @@ Will man allerdings File-Rolling haben, braucht man einen anderen Logging-Provid
 Aus diesem Grund habe ich log4cxx integriert.
 #### Kompilierung
 log4cxx muss selbst gebaut werden. Die aktuelle Version 0.10.0 enthält zwei Fehler, die mit einem Patch gefixt werden können.
+
 	# nötige Libs
 	yum install apr apr-util apr-devel apr-util-devel
 	# log4cxx von einer passenden Location herunterladen
@@ -31,6 +33,7 @@ log4cxx muss selbst gebaut werden. Die aktuelle Version 0.10.0 enthält zwei Feh
 	./configure && make && make install
 
 Da log4cxx standardmäßig keine pkg-config-Datei erzeugt, muss der Pfad zu den Include-Dateien bei der Kompilierung von monitord manuell mit angegeben werden:
+
 	./configure --with-log4cxx --with-log4cxx-includes=/pfad-zu-log4cxx-includes
 
 #### Konfiguration
@@ -49,10 +52,13 @@ Das Plugin libmplugin_activemq pusht automatisch alle eingehenden Nachrichten (Z
 Andere Clients können darauf zugreifen und die Nachrichten dementsprechend verarbeiten.
 #### Kompilierung
 Entweder muss das Paket activemq-cpp selbst kompiliert werden oder aber man zieht es sich aus einem RPM-/Deb-Repository.
+
 	yum install activemq-cpp
 
 Danach muss monitord mit den Parametern
+
 	./configure --enable-plugins --with-activemq
+
 kompiliert werden.
 
 #### Konfiguration
