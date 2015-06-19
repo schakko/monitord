@@ -12,11 +12,11 @@ DLLManager::DLLManager( const char *fname )
 	h=dlopen( fname, RTLD_NOW );
 	if (h==NULL)
 	{
-		err=dlerror();
+		err = dlerror();
 		LOG_ERROR("error loading library file \"" << fname << "\"" )
 		LOG_ERROR("root cause: \"" << err << "\"")
 	}
-
+	
 }
 
 DLLManager::~DLLManager()
