@@ -2,7 +2,7 @@
 
 monitord ist ein Funkauswerter fuer die Protokolle ZVEI, Pocsag und FMS.
 Das eigentliche monitord-Projekt liegt auf www.monitord.de.
-Da die Entwicklung allerdings nicht mehr sonderlich aktiv ist, habe ich hier bei Github das Repository geklont.
+Da die Entwicklung allerdings nicht mehr sonderlich aktiv ist, habe ich hier bei GitHub das Repository geklont.
 
 ## Infos
 Dies Repo ist nur ein Klon vom SVN-Repo. Sollten dort Änderungen auftauchen, werde ich sie hier zurückspielen.
@@ -13,6 +13,7 @@ Ich bin weder Leiter des Projekts noch Ansprechpartner für irgendwelche Protoko
 
 	yum install autoconf automake libtool pkg-config alsa-lib-devel lua-devel
 	aclocal -Im4
+	./autogen.sh
 	./configure && make && make install
 
 ## Features gegenüber der SVN-Basis
@@ -20,11 +21,14 @@ Ich bin weder Leiter des Projekts noch Ansprechpartner für irgendwelche Protoko
 Die monitord-Version aus dem Subversion-Repository beinhaltet einen einfachen Logging-Mechanismus, der i.a.R. auch ausreicht.
 Will man allerdings File-Rolling haben, braucht man einen anderen Logging-Provider.
 Aus diesem Grund habe ich log4cxx integriert.
+
 #### Kompilierung
 log4cxx muss selbst gebaut werden. Die aktuelle Version 0.10.0 enthält zwei Fehler, die mit einem Patch gefixt werden können.
 
 	# nötige Libs
 	yum install apr apr-util apr-devel apr-util-devel
+	# unter Ubuntu:
+	# apt-get install libaprutil1-dev
 	# log4cxx von einer passenden Location herunterladen
 	wget $apache-log4cxx-0.10.0.tar.gz
 	tar -xvf apache-log4cxx-0.10.0.tar.gz
@@ -38,6 +42,7 @@ Da log4cxx standardmäßig keine pkg-config-Datei erzeugt, muss der Pfad zu den 
 
 #### Konfiguration
 In der monitord.xml gibt es nur zwei Sachen zu konfigurieren:
+
 	<monitordconfig>
 		<logfile>log4cxx</logfile>
 		<log4cxxConfig>/pfad/zu/log4cxx.properties</log4cxxConfig>
