@@ -42,7 +42,7 @@ EXTRA_DIST =\
 	monitord/lua.hpp \
 	sample-config/*xml*
 
-monitord_monitord_CPPFLAGS = -Ijthread-1.2.1/src -D_DEBUG -Wall 
+monitord_monitord_CPPFLAGS = -Ijthread-1.2.1/src -D_DEBUG -Wall -z,defs
 # ausgeschaltet -pedantic
 monitord_monitord_LDFLAGS = -g
 monitord_monitord_LDADD =
@@ -169,13 +169,16 @@ monitord_plugins_libmplugin_activemq_la_SOURCES=\
 	monitord/plugins/libmplugin_activemq.cpp
 
 monitord_plugins_libmplugin_activemq_la_CPPFLAGS =\
+	-z,defs \
 	${monitord_monitord_CPPFLAGS} \
 	${ACTIVEMQ_CFLAGS} \
 	${DLL}
 
+# 2015-06-19 ckl: -lactivemq-cpp is required for compilation in an Ubuntu 13.xx environment
 monitord_plugins_libmplugin_activemq_la_LDFLAGS=\
+	-lactivemq-cpp \
 	-no-undefined \
-	${LIBACTIVEMQ} \
+	${LIBACTIVEMQ_CPP} \
 	${DLL}
 
 monitord_plugin_libmplugin_activemq_la_LIBS=\
