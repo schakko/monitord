@@ -42,7 +42,7 @@ EXTRA_DIST =\
 	monitord/lua.hpp \
 	sample-config/*xml*
 
-monitord_monitord_CPPFLAGS = -Ijthread-1.2.1/src -D_DEBUG -Wall -z,defs
+monitord_monitord_CPPFLAGS = -Ijthread-1.2.1/src -D_DEBUG -Wall 
 # ausgeschaltet -pedantic
 monitord_monitord_LDFLAGS = -g
 monitord_monitord_LDADD =
