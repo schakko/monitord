@@ -13,3 +13,16 @@ stamp-h1
 monitord/monitord
 *.in
 configure
+**/.a
+**/.la
+**/.lo
+**/.libs
+/autom4te.cache
+Makefile.in
+/aclocal.m4
+/compile
+/depcomp
+/install-sh
+/missing
+/stamp-h1
+/mkinstalldirs
