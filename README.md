@@ -55,8 +55,9 @@ Sobald logfile auf 'log4cxx' gestellt ist, wird log4cxx auch benutzt. log4cxxCon
 ActiveMQ ist eine Messaging Queue, die nach dem Pub/Sub-Verfahren arbeitet.
 Das Plugin libmplugin_activemq pusht automatisch alle eingehenden Nachrichten (ZVEI, Pocsag, FMS) in die hinterlegte Queue.
 Andere Clients können darauf zugreifen und die Nachrichten dementsprechend verarbeiten.
-#### Kompilierung
 Entweder muss das Paket activemq-cpp selbst kompiliert werden oder aber man zieht es sich aus einem RPM-/Deb-Repository.
+
+#### Kompilierung mit activemq-cpp über Paketmanager
 
 	yum install activemq-cpp
 
@@ -66,6 +67,25 @@ Danach muss monitord mit den Parametern
 
 kompiliert werden.
 
+
+#### Kompilierung mit activemq-cpp als Quellcodedistribution unter CentOS 6.7
+
+	yum install gcc-c++ openssl-devel
+
+	wget ...activemq-cpp-library-3.8.4.zip
+	unzip activemq-cpp-library-3.8.4.zip
+	cd activemq-cpp-library-3.8.4
+	./configure --disable-ssl
+	make && make install
+
+	cd monitord
+
+Danach muss monitord mit den Parametern
+
+	CPPFLAGS=`activemqcpp-config --includes` ./configure --enable-plugins --with-activemq
+
+monitord kompiliert werden.
+	
 #### Konfiguration
 Das Plugin wird in der monitord.xml folgendermaßen konfiguriert:
 
