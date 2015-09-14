@@ -27,8 +27,7 @@ monitord_monitord_SOURCES = \
 	monitord/memlock.cpp \
 	monitord/xmltools.cpp \
 	monitord/MonitorSignals.cpp \
-	xmlParser/xmlParser.cpp
-
+	xmlParser/xmlParser.cpp 
 
 EXTRA_DIST =\
 	xmlParser/xmlParser.h \
@@ -166,10 +165,10 @@ pkglib_LTLIBRARIES+= \
 monitord_plugins_libmplugin_activemq_la_SOURCES=\
 	${monitord_plugins_common} \
 	monitord/plugins/mplugin.cpp \
-	monitord/plugins/libmplugin_activemq.cpp
+	monitord/plugins/libmplugin_activemq.cpp \
+	monitord/plugins/base64.cpp
 
 monitord_plugins_libmplugin_activemq_la_CPPFLAGS =\
-	-z,defs \
 	${monitord_monitord_CPPFLAGS} \
 	${ACTIVEMQ_CFLAGS} \
 	${DLL}

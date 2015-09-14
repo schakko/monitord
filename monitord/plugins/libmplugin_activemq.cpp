@@ -100,11 +100,7 @@ bool MonitorPlugInActiveMQ::processResult(class ModuleResultBase *pRes)
 	LOG_INFO("Preparing final alarm message")
 	TextMessage* message = m_session->createTextMessage();
 
-	ResultItemsMap::iterator i;
-
-	for (i = (*pRes).m_Items.begin(); i != (*pRes).m_Items.end(); i++) {
-		message->setStringProperty(i->first, i->second);
-	}
+	updateTextMessage(*message, *pRes);
 
 	// if sending the messasge item fails, the connection will be recovered on the next processResult call
 	topicInfo->producer->send(message);
@@ -115,6 +111,26 @@ bool MonitorPlugInActiveMQ::processResult(class ModuleResultBase *pRes)
 
 	return true;
 }
+
+void MonitorPlugInActiveMQ::updateTextMessage(cms::TextMessage& textMessage, class ModuleResultBase& pRes) {
+	ResultItemsMap::iterator i;
+
+	for (i = pRes.m_Items.begin(); i != pRes.m_Items.end(); i++) {
+		// ZABOS-150: Binary data (encrypted POCSAG messages) must be converted to Base64 so ActiveMQ can decode the data
+		if (i->first == "text") {
+			textMessage.setStringProperty(
+				i->first, 
+				base64_encode(
+					reinterpret_cast<const unsigned char*>(i->second.c_str()), 
+					i->second.length()
+				)
+			);
+		}
+		else {
+			textMessage.setStringProperty(i->first, i->second);
+		}
+	}
+} 
 
 /**
  * Read the <plugin name="activem">..</plugin> section from the configuration XML file.
@@ -178,7 +194,9 @@ bool MonitorPlugInActiveMQ::initializeConnection()
 	// create a connection
 	try {
 		m_connection = m_connectionFactory->createConnection();
+		LOG_INFO("Connection prepared")
 		m_connection->start();
+		LOG_INFO("Connection started")
 
 		if (m_bClientAck) {
 			m_session = m_connection->createSession(Session::CLIENT_ACKNOWLEDGE);

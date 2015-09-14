@@ -11,6 +11,7 @@
 #endif
 
 #include "mplugin.h"
+#include "base64.h"
 #include "../MonitorLogging.h"
 #include <activemq/core/ActiveMQConnectionFactory.h>
 #include <activemq/util/Config.h>
@@ -22,6 +23,7 @@
 #include <cms/MapMessage.h>
 #include <cms/ExceptionListener.h>
 #include <cms/MessageListener.h>
+#include <activemq/commands/ActiveMQTextMessage.h>
 
 #define ACTIVEMQ_KEY_POCSAG "pocsag"
 #define ACTIVEMQ_KEY_FMS "fms"
@@ -84,6 +86,7 @@ public:
 
 	bool initProcessing(class MonitorConfiguration* configPtr,XMLNode config);
 	bool processResult(class ModuleResultBase *pRes);
+	void updateTextMessage(cms::TextMessage& textMessage, class ModuleResultBase& pRes);
 	bool quitProcessing();
 	void Show();
 

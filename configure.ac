@@ -186,27 +186,17 @@ else
 	fi
 	
 	AS_IF([test "x$use_activemq" != xno],
-		[PKG_CHECK_MODULES(
-			[ACTIVEMQ], 
-			[$ACTIVEMQLIBNAME], 
-			[
-				AC_MSG_NOTICE([activemq is present - ActiveMQ plugin will be created])
-				AC_DEFINE([HAVE_ACTIVEMQ], [1], [Define if you have activemq-cpp])
-				activemq=true
-			],
-			[AC_MSG_FAILURE([$ACTIVEMQLIBNAME is not installed as package])]
-	)])
-#			[AC_CHECK_LIB([$ACTIVEMQLIBNAME],[main],
-#				[
-#					AC_SUBST([LIBACTIVEMQ], ["-l$ACTIVEMQLIBNAME"])
-#					AC_DEFINE([HAVE_ACTIVEMQ], [1], [Define if you have activemq])
-#					activemq=true
-#				],
-#				[if test "x$use_activemq" != xcheck; then
-#					AC_MSG_FAILURE([--with-activemq but $ACTIVEMQLIBNAME failed])
-#				fi
-#			])
-#		])
+			[AC_CHECK_LIB([$ACTIVEMQLIBNAME],[main],
+				[
+					AC_SUBST([LIBACTIVEMQ], ["-l$ACTIVEMQLIBNAME"])
+					AC_DEFINE([HAVE_ACTIVEMQ], [1], [Define if you have activemq])
+					activemq=true
+				],
+				[if test "x$use_activemq" != xcheck; then
+					AC_MSG_FAILURE([--with-activemq but $ACTIVEMQLIBNAME failed])
+				fi
+			])
+		])
 
 
 	LIBS=
