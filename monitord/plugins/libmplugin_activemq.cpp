@@ -36,6 +36,7 @@ MonitorPlugInActiveMQ::MonitorPlugInActiveMQ() : m_connectionFactory(new ActiveM
 	m_bDeliveryModePersistent = false;
 	m_bTopicsInitialized = false;
 
+	m_bConnected = false;
 	m_session = NULL;
 	m_connection = NULL;
 
@@ -218,6 +219,8 @@ bool MonitorPlugInActiveMQ::initializeConnection()
 }
 
 void MonitorPlugInActiveMQ::freeConnection() {
+	LOG_INFO("Freeing connection")
+
 	// close open resources
 	try {
 		if (m_session != NULL) {
@@ -277,8 +280,12 @@ bool MonitorPlugInActiveMQ::initProcessing(class MonitorConfiguration* configPtr
 }
 
 bool MonitorPlugInActiveMQ::establishConnection() {
-	if (initializeConnection()) {
-		initializeTopics(m_topics);
+	if (m_bConnected == false) {
+		LOG_DEBUG("m_bConnected is false: \"" << m_bConnected << "\"")
+	
+		if (initializeConnection()) {
+			initializeTopics(m_topics);
+		}
 	}
 
 	return m_bConnected;
