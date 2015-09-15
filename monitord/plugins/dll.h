@@ -7,6 +7,7 @@
 #include <typeinfo>
 #include <iostream>
 #include <string>
+#include "../MonitorLogging.h"
 
 #ifdef WIN32
 #include <windows.h>
@@ -115,6 +116,8 @@ class DLLFactory : public DLLFactoryBase
 		   const char *func_name=0
 		   ) : DLLFactoryBase( fname, func_name )
 	{
+		LOG_INFO("DllFactory entered fname=\"" << fname << "\", func_name=\"" << func_name << "\"" )
+
 		if( factory_func )
 		  factory = (T *)factory_func();
 		else
