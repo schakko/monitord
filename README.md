@@ -127,3 +127,22 @@ Das Plugin wird in der monitord.xml folgendermaßen konfiguriert:
 
 Bitte beachten: Der XML-Parser von monitord unterstützt *keine* leeren Tags (also <tag/> oder <tag></tag>). Sollte die Konfiguration dennoch einen solchen enthalten, gibt es einen Segmentation Fault.
 
+##### Wiederherstellung der ActiveMQ-Verbindung
+Je nach Einsatz kann es sein, dass die Verbindung zwischen monitord und dem ActiveMQ-Broker abbricht. Dies kann zum Beispiel auftreten, wenn es Probleme mit der TCP-Verbindung gibt oder aber der Broker zwischenzeitlich neugestartet worden ist.
+Um darauf zu reagieren, kann der ActiveMQ-Client ein Failover nutzen:
+
+	<monitordconfig version="1.0">
+		<!-- ... -->
+		<brokerUri>failover://(tcp://127.0.0.1:61616)</brokerUri>
+		<!-- ... -->
+	</monitordconfig>
+
+bzw. wenn mehrere Broker genutzt werden sollen:
+
+	<monitordconfig version="1.0">
+		<!-- ... -->
+		<brokerUri>failover://(tcp://192.168.0.1:61616,192.168.0.2:61616)</brokerUri>
+		<!-- ... -->
+	</monitordconfig>
+
+

@@ -14,6 +14,8 @@
 #include "base64.h"
 #include "../MonitorLogging.h"
 #include <activemq/core/ActiveMQConnectionFactory.h>
+#include <activemq/core/ActiveMQConnection.h>
+#include <activemq/core/ActiveMQSession.h>
 #include <activemq/util/Config.h>
 #include <activemq/library/ActiveMQCPP.h>
 #include <cms/Connection.h>
@@ -78,8 +80,8 @@ public:
 	bool m_bTopicsInitialized;
 
 	std::auto_ptr<activemq::core::ActiveMQConnectionFactory> m_connectionFactory;
-	cms::Connection* m_connection;
-	cms::Session* m_session;
+	activemq::core::ActiveMQConnection* m_connection;
+	activemq::core::ActiveMQSession* m_session;
 
 	TopicInfo m_genericTopic;
 	Topics m_topics;

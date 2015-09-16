@@ -194,16 +194,18 @@ bool MonitorPlugInActiveMQ::initializeConnection()
 
 	// create a connection
 	try {
-		m_connection = m_connectionFactory->createConnection();
+		m_connection = dynamic_cast<activemq::core::ActiveMQConnection*>(m_connectionFactory->createConnection());
 		LOG_INFO("Connection prepared")
 		m_connection->start();
 		LOG_INFO("Connection started")
 
 		if (m_bClientAck) {
-			m_session = m_connection->createSession(Session::CLIENT_ACKNOWLEDGE);
+			LOG_DEBUG("Setting: client acknowledge required")
+			m_session = dynamic_cast<activemq::core::ActiveMQSession*>(m_connection->createSession(Session::CLIENT_ACKNOWLEDGE));
 		} 
 		else {
-			m_session = m_connection->createSession(Session::AUTO_ACKNOWLEDGE);
+			LOG_DEBUG("Setting: auto acknowledge enabled")
+			m_session = dynamic_cast<activemq::core::ActiveMQSession*>(m_connection->createSession(Session::AUTO_ACKNOWLEDGE));
 		}
 
 		m_bConnected = true;
@@ -224,10 +226,12 @@ void MonitorPlugInActiveMQ::freeConnection() {
 	// close open resources
 	try {
 		if (m_session != NULL) {
+			LOG_DEBUG("Closing session..")
 			m_session->close();
 		}
 
 		if (m_connection != NULL) {
+			LOG_DEBUG("Closing connection...")
 			m_connection->close();
 		}
 	}
@@ -280,6 +284,24 @@ bool MonitorPlugInActiveMQ::initProcessing(class MonitorConfiguration* configPtr
 }
 
 bool MonitorPlugInActiveMQ::establishConnection() {
+	// if some connection issue has occured, try to reconnect to the broker
+	try {
+		if (m_connection != NULL) {
+			LOG_DEBUG("Checking for closed connection")
+			m_connection->checkClosed();
+		}
+
+		if (m_session != NULL && (false == m_session->isStarted())) {
+			throw CMSException("Connection open but session not started");
+		}
+		
+	}
+	catch (CMSException& ex) {
+		LOG_ERROR("Connection is broke:" << ex.getMessage())
+		LOG_INFO("Freeing resources for reconnecting...")
+		freeConnection();
+	}
+
 	if (m_bConnected == false) {
 		LOG_DEBUG("m_bConnected is false: \"" << m_bConnected << "\"")
 	
