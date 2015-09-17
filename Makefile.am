@@ -1,5 +1,5 @@
 # Tell automake to put the object file for monitord/apple.c in dir monitord/
-AUTOMAKE_OPTIONS := subdir-objects
+AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = -I m4
 
 # The installable executable.
