@@ -1,6 +1,3 @@
-#m4_define([git_version], 
-#	m4_esyscmd(git describe --abbrev=4 --dirty --always --tags))
-
 AC_INIT([monitord], m4_esyscmd(git describe --abbrev=6 --dirty --always --tags | tr -d '\n\r'), [monitor@lists.jhr-online.de])
 AC_CANONICAL_SYSTEM
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
