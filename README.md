@@ -70,7 +70,7 @@ kompiliert werden.
 
 #### Kompilierung mit activemq-cpp als Quellcodedistribution unter CentOS 6.7
 
-	yum install gcc-c++ openssl-devel
+	yum install gcc-c++ openssl-devel apr-devel
 
 	wget ...activemq-cpp-library-3.8.4.zip
 	unzip activemq-cpp-library-3.8.4.zip
