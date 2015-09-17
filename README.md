@@ -127,6 +127,11 @@ Das Plugin wird in der monitord.xml folgendermaßen konfiguriert:
 
 Bitte beachten: Der XML-Parser von monitord unterstützt *keine* leeren Tags (also <tag/> oder <tag></tag>). Sollte die Konfiguration dennoch einen solchen enthalten, gibt es einen Segmentation Fault.
 
+##### IPv6
+activemq-cpp unterstützt momentan keine IPv6-Endpunkte. Der ActiveMQ-Broker muss also auf einem IPv4-Port lauschen. Damit ActiveMQ standardmäßig IPv4 anstelle von IPv6 nutzt, kann folgende Einstellung in der /etc/default/activemq gesetzt werden
+
+	ACTIVEMQ_DEBUG_OPTS="-Djava.net.preferIPv4Stack=true"
+
 ##### Wiederherstellung der ActiveMQ-Verbindung
 Je nach Einsatz kann es sein, dass die Verbindung zwischen monitord und dem ActiveMQ-Broker abbricht. Dies kann zum Beispiel auftreten, wenn es Probleme mit der TCP-Verbindung gibt oder aber der Broker zwischenzeitlich neugestartet worden ist.
 Um darauf zu reagieren, kann der ActiveMQ-Client ein Failover nutzen:
