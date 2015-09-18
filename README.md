@@ -150,4 +150,13 @@ bzw. wenn mehrere Broker genutzt werden sollen:
 		<!-- ... -->
 	</monitordconfig>
 
+## Start
+Das Script *monitord-start-stop* muss nach /etc/init.d/monitord kopiert werden. Standardmäßig läuft monitord unter der Benutzer *monitord*. Dieser muss vorher erstellt worden sein.
+Die Datei /etc/init.d/monitord muss angepasst werden, so dass die korrekten Pfade zur ausführbaren Datei von monitord und zur monitord.xml eingetragen worden sind.
 
+
+Über
+	
+	/etc/init.d/monitord start
+
+lässt sich monitord starten.

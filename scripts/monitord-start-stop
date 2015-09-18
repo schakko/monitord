@@ -1,0 +1,122 @@
+#!/bin/sh
+#
+# monitord	This is the init script for starting monitord (ZVEI/POCSAG receiver)
+#
+# chkconfig: - 66 19
+# description: monitord
+# processname: monitord
+# pidfile: /var/run/monitord.pid
+#
+# basically taken from /etc/init.d/postgresql for CentOS 6.2
+
+# load functions
+. /etc/rc.d/init.d/functions
+
+NAME=`basename $0`
+
+if [ ${NAME:0:1} = "S" -o ${NAME:0:1} = "K" ]
+then
+	NAME=${NAME:3}
+fi
+
+# SELinux
+if [ -x /sbin/runuser ]
+then
+	SU=runuser
+else
+	SU=su
+fi
+
+MONITORD=/opt/monitord/monitord
+MONITORD_USER=monitord
+MONITORD_CONFIG=/opt/monitord/monitord.xml
+MONITORD_OPTS=""
+MONITORD_STARTUP_LOG=/tmp/monitord-startup.log
+
+if [[ ! -x $MONITORD ]]
+then
+	echo 
+	echo "$MONITORD is missing or not executable"
+	echo
+	exit 1
+fi
+
+lockfile="/var/lock/subsys/${NAME}"
+pidfile="/var/run/monitord.pid"
+
+script_result=0
+
+start() {
+	if [ -z "$1" ]
+	then
+		echo "Waiting 15 seconds for coming up ActiveMQ..."
+		sleep 15
+	fi
+
+	MONITORD_START="Starting monitord..."
+	STARTUP_LINE="$MONITORD -c $MONITORD_CONFIG$MONITORD_OPTS"
+	
+	$SU -c "$STARTUP_LINE &" - $MONITORD_USER >> "$MONITORD_STARTUP_LOG" 2>&1 #< /dev/null
+	sleep 2
+	pid=`ps -ef | grep "$STARTUP_LINE" | grep -v "grep" | awk '{ print \$2 }'`
+
+	if [ "x$pid" != x ] 
+	then
+		success "$MONITORD_START"
+		touch "$lockfile"
+		echo $pid > "$pidfile"
+		echo
+	else
+		failure "$MONITORD_START"
+		echo
+		script_result=1
+	fi
+}
+
+stop() {
+	echo -n "Stopping monitord service: "
+	if [ -e "$lockfile" ]
+	then
+		kill `cat $pidfile`
+		ret=$?
+
+		if [ $ret -eq 0 ]
+		then
+			echo_success
+			rm -f "$pidfile"
+			rm -f "$lockfile"
+		else
+			echo_failure
+			script_result=1
+		fi
+	else
+		echo_success
+	fi
+	echo
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	start-force)
+		start now
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		restart
+		;;
+	*)
+		echo $"Usage: $0 (start|stop|restart)"
+		exit 2
+esac
+
+exit $script_result
+		

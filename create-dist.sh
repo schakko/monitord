@@ -17,6 +17,7 @@ fi
 mkdir $TARGET_DIR
 cp monitord/monitord $TARGET_DIR
 cp monitord/plugins/.libs/libmplugin_activemq.* $TARGET_DIR
+cp monitord/scripts/* $TARGET_DIR
 
 # find libactivemq
 LIBACTIVEMQ=`ldconfig -p | grep "activemq" | cut -d\> -f2`
