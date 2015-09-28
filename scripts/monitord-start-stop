@@ -100,6 +100,33 @@ restart() {
 	start
 }
 
+status() {
+        if [ -f $pidfile ]
+        then
+                pid=`cat $pidfile`
+
+                if  [ "x$pid" != "x" ]
+                then
+                        pidtest=`ps aux | grep "monitord" | grep -v "grep" | grep -v "monitord status"`
+
+                        if [ "x$pidtest" = "x" ]
+                        then
+                                rm -f $pidfile
+                                echo "Removed stale pid file $pidfile"
+                                pid=""
+                        else
+                                echo "Monitord running"
+                                return 0
+                        fi
+
+                fi
+        fi
+
+        echo "Monitord not started"
+        exit 1
+}
+
+
 case "$1" in
 	start)
 		start
@@ -113,8 +140,11 @@ case "$1" in
 	restart)
 		restart
 		;;
+ 	status)
+                status
+                ;;
 	*)
-		echo $"Usage: $0 (start|stop|restart)"
+		echo $"Usage: $0 (start|stop|restart|status)"
 		exit 2
 esac
 
