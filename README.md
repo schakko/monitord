@@ -138,7 +138,8 @@ Um darauf zu reagieren, kann der ActiveMQ-Client ein Failover nutzen:
 
 	<monitordconfig version="1.0">
 		<!-- ... -->
-		<brokerUri>failover://(tcp://127.0.0.1:61616)</brokerUri>
+		<!-- startupMaxReconnectAttempts=1 sorgt dafür, dass beim *ersten* Start mindestens ein Server kontaktierbar ist. Dies stellt sicher, dass sich keine Konfigurationsfehler einschleichen -->
+		<brokerUri>failover://(tcp://127.0.0.1:61616)?startupMaxReconnectAttempts=1</brokerUri>
 		<!-- ... -->
 	</monitordconfig>
 
@@ -146,7 +147,8 @@ bzw. wenn mehrere Broker genutzt werden sollen:
 
 	<monitordconfig version="1.0">
 		<!-- ... -->
-		<brokerUri>failover://(tcp://192.168.0.1:61616,192.168.0.2:61616)</brokerUri>
+		<!-- startupMaxReconnectAttempts=1 sorgt dafür, dass beim *ersten* Start mindestens ein Server kontaktierbar ist. Dies stellt sicher, dass sich keine Konfigurationsfehler einschleichen -->
+		<brokerUri>failover://(tcp://192.168.0.1:61616,192.168.0.2:61616)?startupMaxReconnectAttempts=1</brokerUri>
 		<!-- ... -->
 	</monitordconfig>
 
