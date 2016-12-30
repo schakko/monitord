@@ -1,6 +1,7 @@
 
 #include <typeinfo>
 #include <iostream>
+#include <unistd.h>
 
 #ifdef WIN32
 #define usleep Sleep
