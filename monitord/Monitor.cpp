@@ -150,9 +150,15 @@ int main(int argc, char** argv)
 		}
 	#endif
 
-	} catch (MonitorException(err))
+	}
+	catch (MonitorExitException &err)
 	{
-		LOG_ERROR(err.what() )
+		//LOG_INFO(err.what())
+		// do nothing
+	}
+	catch (std::exception &err)
+	{
+		LOG_ERROR(err.what())
 	}
 }
 

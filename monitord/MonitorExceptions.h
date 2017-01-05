@@ -10,6 +10,14 @@ class MonitorException : public std::runtime_error {
      : std::runtime_error(s)
      { }
  };
- #define ThrowMonitorException(err) throw( MonitorException(std::string(__FILE__)+ std::string(" Line ") + convertIntToString(__LINE__) + std::string(": ") + std::string(err) ))
+
+class MonitorExitException : public MonitorException
+{
+public:
+	MonitorExitException() : MonitorException("")
+	{ }
+};
+
+#define ThrowMonitorException(err) throw( MonitorException(std::string(__FILE__) + std::string(" Line ") + convertIntToString(__LINE__) + std::string(": ") + std::string(err) ))
 
 #endif /*MONITOREXCEPTIONS_H_*/

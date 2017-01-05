@@ -304,12 +304,15 @@ bool MonitorConfiguration::ParseCommandline(int argc, TCHAR * argv[])
 	enum { OPT_HELP, OPT_FLAG, OPT_ARG };
 
 	CSimpleOpt::SOption g_rgOptions[] = {
-    	{ OPT_FLAG, _T((char *)"-d"),     SO_NONE    }, // "-d" = daemon
-    	{ OPT_ARG,  _T((char *)"-c"),     SO_REQ_SEP }, // "-c ARG" = config
-    	{ OPT_ARG, _T((char *)"--dev0"),     SO_REQ_SEP   }, // Geraete
-    	{ OPT_ARG, _T((char *)"--dev1"),     SO_REQ_SEP   }, //
-    	{ OPT_ARG, _T((char *)"--dev2"),     SO_REQ_SEP   }, //
-    	{ OPT_ARG, _T((char *)"--dev3"),     SO_REQ_SEP   }, //
+    	{ OPT_FLAG, _T((char *)"-d"), SO_NONE }, // "-d" = daemon
+    	{ OPT_ARG, _T((char *)"-c"), SO_REQ_SEP }, // "-c ARG" = config
+		{ OPT_FLAG, _T((char *)"-v"), SO_NONE }, // "-v print version
+		{ OPT_HELP, _T((char *)"-h"), SO_NONE }, // "--help"
+		{ OPT_HELP, _T((char *)"--help"), SO_NONE },
+    	{ OPT_ARG, _T((char *)"--dev0"), SO_REQ_SEP }, // Geraete
+    	{ OPT_ARG, _T((char *)"--dev1"), SO_REQ_SEP }, //
+    	{ OPT_ARG, _T((char *)"--dev2"), SO_REQ_SEP }, //
+    	{ OPT_ARG, _T((char *)"--dev3"), SO_REQ_SEP }, //
 #ifdef WIN32
     	{ OPT_FLAG, _T((char *)"--install"),   SO_NONE    }, // "--install" = install service
     	{ OPT_FLAG, _T((char *)"--uninstall"), SO_NONE    }, // "--uninstall" = uninstall service
@@ -334,11 +337,20 @@ bool MonitorConfiguration::ParseCommandline(int argc, TCHAR * argv[])
 
     // while there are arguments left to process
     while (args.Next()) {
+		if (args.OptionId() == OPT_HELP)
+		{
+			std::cout << "Usage: monitord [-d] [-h] [--help] -c CONFIGFILE" << std::endl;
+			throw MonitorExitException();
+		}
+
         if (args.LastError() == SO_SUCCESS) {
         	if (strcmp (args.OptionText(), "-d") == 0){
     			m_Daemonize=true ;
         	} else if (strcmp (args.OptionText(), "-c") == 0) {
     			m_ConfigFile=args.OptionArg() ;
+        	} else if (strcmp (args.OptionText(), "-v") == 0) {
+        		std::cout << "monitord version: " << VERSION << std::endl;
+    			throw MonitorExitException();
         	} else if (strcmp (args.OptionText(), "--dev0") == 0) {
     			m_sndConfig[0].sDevice=args.OptionArg() ;
         	} else if (strcmp (args.OptionText(), "--dev1") == 0) {
