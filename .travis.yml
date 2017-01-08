@@ -1,0 +1,26 @@
+sudo: rquired
+
+language:
+  - cpp
+
+os:
+  - linux
+
+dist:
+  - xenial
+
+compiler:
+  - g++
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y autoconf automake libtool pkg-config alsa-base alsa-utils g++ make libasound2-dev libtolua++5.1-dev
+
+
+script:
+- cd $TRAVIS_BUILD_DIR
+- aclocal -Im4
+- ./autogen.sh
+- ./configure --exec-prefix=$PWD/build/ --prefix=$PWD/build/ --with-lua-includes=/usr/include/lua5.1 --with-lua-suffix="5.1"
+- make
+- make install
